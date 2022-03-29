@@ -4,40 +4,39 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
  * The persistent class for the igrac database table.
  * 
  */
 @Entity
-@NamedQuery(name="Igrac.findAll", query="SELECT i FROM Igrac i")
+@NamedQuery(name = "Igrac.findAll", query = "SELECT i FROM Igrac i")
 public class Igrac implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IGRAC_ID_GENERATOR", sequenceName="IGRAC_ID_REQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IGRAC_ID_GENERATOR")
+	@SequenceGenerator(name = "IGRAC_ID_GENERATOR", sequenceName = "IGRAC_ID_REQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IGRAC_ID_GENERATOR")
 	private Integer id;
 
-	@Column(name="broj_reg")
+	@Column(name = "broj_reg")
 	private String brojReg;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="datum_rodjenja")
+	@Column(name = "datum_rodjenja")
 	private Date datumRodjenja;
 
 	private String ime;
 
 	private String prezime;
 
-	//bi-directional many-to-one association to Nacionalnost
+	// bi-directional many-to-one association to Nacionalnost
 	@ManyToOne
-	@JoinColumn(name="nacionalnost")
+	@JoinColumn(name = "nacionalnost")
 	private Nacionalnost nacionalnost;
 
-	//bi-directional many-to-one association to Tim
+	// bi-directional many-to-one association to Tim
 	@ManyToOne
-	@JoinColumn(name="tim")
+	@JoinColumn(name = "tim")
 	private Tim tim;
 
 	public Igrac() {

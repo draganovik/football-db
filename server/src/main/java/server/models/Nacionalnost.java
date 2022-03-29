@@ -2,29 +2,32 @@ package server.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 
 /**
  * The persistent class for the nacionalnost database table.
  * 
  */
 @Entity
-@NamedQuery(name="Nacionalnost.findAll", query="SELECT n FROM Nacionalnost n")
+@NamedQuery(name = "Nacionalnost.findAll", query = "SELECT n FROM Nacionalnost n")
 public class Nacionalnost implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NACIONALNOST_ID_GENERATOR", sequenceName="NACIONALNOST_ID_REQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NACIONALNOST_ID_GENERATOR")
+	@SequenceGenerator(name = "NACIONALNOST_ID_GENERATOR", sequenceName = "NACIONALNOST_ID_REQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NACIONALNOST_ID_GENERATOR")
 	private Integer id;
 
 	private String naziv;
 
 	private String skracenica;
 
-	//bi-directional many-to-one association to Igrac
-	@OneToMany(mappedBy="nacionalnost")
+	// bi-directional many-to-one association to Igrac
+	@OneToMany(mappedBy = "nacionalnost")
+	@JsonIgnore
 	private List<Igrac> igracs;
 
 	public Nacionalnost() {

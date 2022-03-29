@@ -5,19 +5,18 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the tim database table.
  * 
  */
 @Entity
-@NamedQuery(name="Tim.findAll", query="SELECT t FROM Tim t")
+@NamedQuery(name = "Tim.findAll", query = "SELECT t FROM Tim t")
 public class Tim implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TIM_ID_GENERATOR", sequenceName="TIM_ID_REQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TIM_ID_GENERATOR")
+	@SequenceGenerator(name = "TIM_ID_GENERATOR", sequenceName = "TIM_ID_REQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TIM_ID_GENERATOR")
 	private Integer id;
 
 	private String naziv;
@@ -27,13 +26,13 @@ public class Tim implements Serializable {
 
 	private String sediste;
 
-	//bi-directional many-to-one association to Igrac
-	@OneToMany(mappedBy="tim")
+	// bi-directional many-to-one association to Igrac
+	@OneToMany(mappedBy = "tim")
 	private List<Igrac> igracs;
 
-	//bi-directional many-to-one association to Liga
+	// bi-directional many-to-one association to Liga
 	@ManyToOne
-	@JoinColumn(name="liga")
+	@JoinColumn(name = "liga")
 	private Liga liga;
 
 	public Tim() {

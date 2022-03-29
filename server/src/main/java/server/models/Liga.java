@@ -2,29 +2,34 @@ package server.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 
 /**
  * The persistent class for the liga database table.
  * 
  */
 @Entity
-@NamedQuery(name="Liga.findAll", query="SELECT l FROM Liga l")
+@NamedQuery(name = "Liga.findAll", query = "SELECT l FROM Liga l")
+@JsonIgnoreProperties({ "handler" })
 public class Liga implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="LIGA_ID_GENERATOR", sequenceName="LIGA_ID_REQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LIGA_ID_GENERATOR")
+	@SequenceGenerator(name = "LIGA_ID_GENERATOR", sequenceName = "LIGA_ID_REQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIGA_ID_GENERATOR")
 	private Integer id;
 
 	private String naziv;
 
 	private String oznaka;
 
-	//bi-directional many-to-one association to Tim
-	@OneToMany(mappedBy="liga")
+	// bi-directional many-to-one association to Tim
+	@OneToMany(mappedBy = "liga")
+	@JsonIgnore
 	private List<Tim> tims;
 
 	public Liga() {
