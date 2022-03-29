@@ -8,11 +8,11 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>rpp-start</groupId>
-	<artifactId>rpp-start</artifactId>
+	<groupId>rva-server</groupId>
+	<artifactId>rva-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rpp-start</name>
-	<description>rpp-start</description>
+	<name>rva-server</name>
+	<description>rva-server</description>
 
 	<properties>
 		<java.version>1.8</java.version>

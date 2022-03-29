@@ -1,10 +1,10 @@
-package rppstart;
+package tests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RppStartApplicationTests {
+class RvaServerApplicationTests {
 
 	@Test
 	void contextLoads() {
