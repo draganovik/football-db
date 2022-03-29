@@ -32,7 +32,7 @@ e2e/*.js
 e2e/*.map
 
 # System Files
-.DS_Store/
+.DS_Store
 
 ### Java ###
 # Compiled class file
