@@ -24,7 +24,7 @@ public class Liga implements Serializable {
 	private String oznaka;
 
 	//bi-directional many-to-one association to Tim
-	@OneToMany(mappedBy="ligaBean")
+	@OneToMany(mappedBy="liga")
 	private List<Tim> tims;
 
 	public Liga() {
@@ -64,14 +64,14 @@ public class Liga implements Serializable {
 
 	public Tim addTim(Tim tim) {
 		getTims().add(tim);
-		tim.setLigaBean(this);
+		tim.setLiga(this);
 
 		return tim;
 	}
 
 	public Tim removeTim(Tim tim) {
 		getTims().remove(tim);
-		tim.setLigaBean(null);
+		tim.setLiga(null);
 
 		return tim;
 	}

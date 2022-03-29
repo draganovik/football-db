@@ -24,7 +24,7 @@ public class Nacionalnost implements Serializable {
 	private String skracenica;
 
 	//bi-directional many-to-one association to Igrac
-	@OneToMany(mappedBy="nacionalnostBean")
+	@OneToMany(mappedBy="nacionalnost")
 	private List<Igrac> igracs;
 
 	public Nacionalnost() {
@@ -64,14 +64,14 @@ public class Nacionalnost implements Serializable {
 
 	public Igrac addIgrac(Igrac igrac) {
 		getIgracs().add(igrac);
-		igrac.setNacionalnostBean(this);
+		igrac.setNacionalnost(this);
 
 		return igrac;
 	}
 
 	public Igrac removeIgrac(Igrac igrac) {
 		getIgracs().remove(igrac);
-		igrac.setNacionalnostBean(null);
+		igrac.setNacionalnost(null);
 
 		return igrac;
 	}
