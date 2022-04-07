@@ -17,6 +17,14 @@ VALUES(
 INSERT INTO tim
 VALUES(
         NEXTVAL('tim_id_req'),
+        'FC Barcelona',
+        to_date('1899', 'yyyy'),
+        'Barcelona',
+        'La Liga'
+    );
+INSERT INTO tim
+VALUES(
+        NEXTVAL('tim_id_req'),
         'Borussia Dortmund',
         to_date('1905', 'yyyy'),
         'Dortmund',
@@ -105,25 +113,9 @@ VALUES(
 INSERT INTO tim
 VALUES(
         NEXTVAL('tim_id_req'),
-        'Burnley F.C.',
-        to_date('1893', 'yyyy'),
-        'Burnley',
-        'Premier League'
-    );
-INSERT INTO tim
-VALUES(
-        NEXTVAL('tim_id_req'),
         'AS Monaco FC',
         to_date('1924', 'yyyy'),
         'Monaco',
-        'Ligue 1'
-    );
-INSERT INTO tim
-VALUES(
-        NEXTVAL('tim_id_req'),
-        'Toulouse FC',
-        to_date('1928', 'yyyy'),
-        'Toulouse',
         'Ligue 1'
     );
 INSERT INTO tim
@@ -145,8 +137,16 @@ VALUES(
 INSERT INTO tim
 VALUES(
         NEXTVAL('tim_id_req'),
-        'FC Lorient',
-        to_date('1932', 'yyyy'),
-        'Lorient',
+        'Paris Saint-Germain F.C.',
+        to_date('1933', 'yyyy'),
+        'Paris',
         'Ligue 1'
+    );
+INSERT INTO tim
+VALUES(
+        NEXTVAL('tim_id_req'),
+        'Real Madrid C.F.',
+        to_date('1934', 'yyyy'),
+        'Madrid',
+        'La Liga'
     );
