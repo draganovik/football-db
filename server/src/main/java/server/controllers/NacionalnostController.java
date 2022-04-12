@@ -40,7 +40,7 @@ public class NacionalnostController {
 		return nacionalnostRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 
-	@PostMapping("Nacionalnost")
+	@PostMapping("/nacionalnost")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost Nacionalnost) {
 		if (!nacionalnostRepository.existsById(Nacionalnost.getId())) {
 			nacionalnostRepository.save(Nacionalnost);
@@ -49,7 +49,7 @@ public class NacionalnostController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@PutMapping("Nacionalnost")
+	@PutMapping("/nacionalnost")
 	public ResponseEntity<Nacionalnost> updateNacionalnost(@RequestBody Nacionalnost Nacionalnost) {
 		if (nacionalnostRepository.existsById(Nacionalnost.getId())) {
 			nacionalnostRepository.save(Nacionalnost);
@@ -58,7 +58,7 @@ public class NacionalnostController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@DeleteMapping("Nacionalnost/{id}")
+	@DeleteMapping("/nacionalnost/{id}")
 	public ResponseEntity<Nacionalnost> deleteNacionalnost(@PathVariable("id") Integer id) {
 		if (nacionalnostRepository.existsById(id)) {
 			nacionalnostRepository.deleteById(id);

@@ -41,7 +41,7 @@ public class LigaController {
 		return ligaRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 
-	@PostMapping("Liga")
+	@PostMapping("/liga")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga Liga) {
 		if (!ligaRepository.existsById(Liga.getId())) {
 			ligaRepository.save(Liga);
@@ -50,7 +50,7 @@ public class LigaController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@PutMapping("Liga")
+	@PutMapping("/liga")
 	public ResponseEntity<Liga> updateLiga(@RequestBody Liga Liga) {
 		if (ligaRepository.existsById(Liga.getId())) {
 			ligaRepository.save(Liga);
@@ -59,7 +59,7 @@ public class LigaController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@DeleteMapping("Liga/{id}")
+	@DeleteMapping("/liga/{id}")
 	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {
 		if (ligaRepository.existsById(id)) {
 			ligaRepository.deleteById(id);

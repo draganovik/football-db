@@ -40,7 +40,7 @@ public class TimController {
 		return timRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 
-	@PostMapping("Tim")
+	@PostMapping("/tim")
 	public ResponseEntity<Tim> insertTim(@RequestBody Tim Tim) {
 		if (!timRepository.existsById(Tim.getId())) {
 			timRepository.save(Tim);
@@ -49,7 +49,7 @@ public class TimController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@PutMapping("Tim")
+	@PutMapping("/tim")
 	public ResponseEntity<Tim> updateTim(@RequestBody Tim Tim) {
 		if (timRepository.existsById(Tim.getId())) {
 			timRepository.save(Tim);
@@ -58,7 +58,7 @@ public class TimController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@DeleteMapping("Tim/{id}")
+	@DeleteMapping("/tim/{id}")
 	public ResponseEntity<Tim> deleteTim(@PathVariable("id") Integer id) {
 		if (timRepository.existsById(id)) {
 			timRepository.deleteById(id);

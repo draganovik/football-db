@@ -40,7 +40,7 @@ public class IgracController {
 		return igracRepository.findByImeContainingIgnoreCase(ime);
 	}
 
-	@PostMapping("Igrac")
+	@PostMapping("/igrac")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac Igrac) {
 		if (!igracRepository.existsById(Igrac.getId())) {
 			igracRepository.save(Igrac);
@@ -49,7 +49,7 @@ public class IgracController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@PutMapping("Igrac")
+	@PutMapping("/igrac")
 	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac Igrac) {
 		if (igracRepository.existsById(Igrac.getId())) {
 			igracRepository.save(Igrac);
@@ -58,7 +58,7 @@ public class IgracController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@DeleteMapping("Igrac/{id}")
+	@DeleteMapping("/igrac/{id}")
 	public ResponseEntity<Igrac> deleteIgrac(@PathVariable("id") Integer id) {
 		if (igracRepository.existsById(id)) {
 			igracRepository.deleteById(id);
