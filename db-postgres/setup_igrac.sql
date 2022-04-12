@@ -99,7 +99,7 @@ VALUES(
 		'Matic',
 		NEXTVAL('player_code'),
 		to_date('1.8.1988', 'dd.MM.yyyy'),
-		167,
+		168,
 		11
 	);
 INSERT INTO igrac
