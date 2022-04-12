@@ -36,11 +36,11 @@ public class LigaController {
 		return ligaRepository.findById(id);
 	}
 
-	/*
-	 * @GetMapping("ligaNaziv/{naziv}") public Collection<Liga>
-	 * getLigaiByNaziv(@PathVariable("naziv") String naziv) { return
-	 * ligaRepository.findByNazivContainingIgnoreCase(naziv); }
-	 */
+	@GetMapping("/liga/naziv/{naziv}")
+	public Collection<Liga> getLigaiByNaziv(@PathVariable("naziv") String naziv) {
+		return ligaRepository.findByNazivContainingIgnoreCase(naziv);
+	}
+
 	@PostMapping("Liga")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga Liga) {
 		if (!ligaRepository.existsById(Liga.getId())) {

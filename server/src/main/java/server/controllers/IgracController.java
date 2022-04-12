@@ -35,11 +35,11 @@ public class IgracController {
 		return igracRepository.findById(id);
 	}
 
-	/*
-	 * @GetMapping("igracNaziv/{naziv}") public Collection<Igrac>
-	 * getIgraciByNaziv(@PathVariable("naziv") String naziv) { return
-	 * igracRepository.findByNazivContainingIgnoreCase(naziv); }
-	 */
+	@GetMapping("/igrac/ime/{ime}")
+	public Collection<Igrac> getIgraciByNaziv(@PathVariable("ime") String ime) {
+		return igracRepository.findByImeContainingIgnoreCase(ime);
+	}
+
 	@PostMapping("Igrac")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac Igrac) {
 		if (!igracRepository.existsById(Igrac.getId())) {

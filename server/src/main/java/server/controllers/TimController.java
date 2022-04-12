@@ -35,11 +35,11 @@ public class TimController {
 		return timRepository.findById(id);
 	}
 
-	/*
-	 * @GetMapping("timNaziv/{naziv}") public Collection<Tim>
-	 * getTimiByNaziv(@PathVariable("naziv") String naziv) { return
-	 * timRepository.findByNazivContainingIgnoreCase(naziv); }
-	 */
+	@GetMapping("/tim/naziv/{naziv}")
+	public Collection<Tim> getTimiByNaziv(@PathVariable("naziv") String naziv) {
+		return timRepository.findByNazivContainingIgnoreCase(naziv);
+	}
+
 	@PostMapping("Tim")
 	public ResponseEntity<Tim> insertTim(@RequestBody Tim Tim) {
 		if (!timRepository.existsById(Tim.getId())) {

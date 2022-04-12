@@ -35,11 +35,11 @@ public class NacionalnostController {
 		return nacionalnostRepository.findById(id);
 	}
 
-	/*
-	 * @GetMapping("nacionalnostNaziv/{naziv}") public Collection<Nacionalnost>
-	 * getNacionalnostiByNaziv(@PathVariable("naziv") String naziv) { return
-	 * nacionalnostRepository.findByNazivContainingIgnoreCase(naziv); }
-	 */
+	@GetMapping("/nacionalnost/naziv/{naziv}")
+	public Collection<Nacionalnost> getNacionalnostiByNaziv(@PathVariable("naziv") String naziv) {
+		return nacionalnostRepository.findByNazivContainingIgnoreCase(naziv);
+	}
+
 	@PostMapping("Nacionalnost")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost Nacionalnost) {
 		if (!nacionalnostRepository.existsById(Nacionalnost.getId())) {
