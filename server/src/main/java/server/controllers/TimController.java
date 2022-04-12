@@ -41,21 +41,21 @@ public class TimController {
 	}
 
 	@PostMapping("/tim")
-	public ResponseEntity<Tim> insertTim(@RequestBody Tim Tim) {
-		if (!timRepository.existsById(Tim.getId())) {
-			timRepository.save(Tim);
-			return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
+		if (tim.getId() == null) {
+			timRepository.save(tim);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
 	@PutMapping("/tim")
-	public ResponseEntity<Tim> updateTim(@RequestBody Tim Tim) {
-		if (timRepository.existsById(Tim.getId())) {
-			timRepository.save(Tim);
+	public ResponseEntity<Tim> updateTim(@RequestBody Tim tim) {
+		if (timRepository.existsById(tim.getId())) {
+			timRepository.save(tim);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@DeleteMapping("/tim/{id}")
@@ -65,7 +65,7 @@ public class TimController {
 
 			if (id == -100) {
 				jdbcTemplate.execute(
-						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', 'Super Liga' );");
+						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', 'Super Liga');");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);

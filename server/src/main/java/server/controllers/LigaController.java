@@ -42,21 +42,21 @@ public class LigaController {
 	}
 
 	@PostMapping("/liga")
-	public ResponseEntity<Liga> insertLiga(@RequestBody Liga Liga) {
-		if (!ligaRepository.existsById(Liga.getId())) {
-			ligaRepository.save(Liga);
-			return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
+		if (liga.getId() == null) {
+			Liga temp = ligaRepository.save(liga);
+			return new ResponseEntity<>(temp, HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
 	@PutMapping("/liga")
-	public ResponseEntity<Liga> updateLiga(@RequestBody Liga Liga) {
-		if (ligaRepository.existsById(Liga.getId())) {
-			ligaRepository.save(Liga);
+	public ResponseEntity<Liga> updateLiga(@RequestBody Liga liga) {
+		if (ligaRepository.existsById(liga.getId())) {
+			ligaRepository.save(liga);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@DeleteMapping("/liga/{id}")
@@ -65,7 +65,7 @@ public class LigaController {
 			ligaRepository.deleteById(id);
 
 			if (id == -100) {
-				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Loga', 'SRB');");
+				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Liga', 'SRB');");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);

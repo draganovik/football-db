@@ -41,21 +41,21 @@ public class IgracController {
 	}
 
 	@PostMapping("/igrac")
-	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac Igrac) {
-		if (!igracRepository.existsById(Igrac.getId())) {
-			igracRepository.save(Igrac);
-			return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
+		if (igrac.getId() == null) {
+			igracRepository.save(igrac);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
 	@PutMapping("/igrac")
-	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac Igrac) {
-		if (igracRepository.existsById(Igrac.getId())) {
-			igracRepository.save(Igrac);
+	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac igrac) {
+		if (igracRepository.existsById(igrac.getId())) {
+			igracRepository.save(igrac);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@DeleteMapping("/igrac/{id}")
@@ -65,7 +65,7 @@ public class IgracController {
 
 			if (id == -100) {
 				jdbcTemplate.execute(
-						"INSERT INTO igrac VALUES(-100, 'Nemanja', 'Matic', 666, to_date('1.8.1988', 'dd.MM.yyyy'), 168, 'Radnički' );");
+						"INSERT INTO igrac VALUES(-100, 'Nemanja', 'Matic', 1, to_date('1.8.1988', 'dd.MM.yyyy'), 1, 'Radnički');");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);

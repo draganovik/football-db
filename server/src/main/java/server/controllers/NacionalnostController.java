@@ -41,21 +41,21 @@ public class NacionalnostController {
 	}
 
 	@PostMapping("/nacionalnost")
-	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost Nacionalnost) {
-		if (!nacionalnostRepository.existsById(Nacionalnost.getId())) {
-			nacionalnostRepository.save(Nacionalnost);
-			return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost nacionalnost) {
+		if (nacionalnost.getId() == null) {
+			nacionalnostRepository.save(nacionalnost);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
 	@PutMapping("/nacionalnost")
-	public ResponseEntity<Nacionalnost> updateNacionalnost(@RequestBody Nacionalnost Nacionalnost) {
-		if (nacionalnostRepository.existsById(Nacionalnost.getId())) {
-			nacionalnostRepository.save(Nacionalnost);
+	public ResponseEntity<Nacionalnost> updateNacionalnost(@RequestBody Nacionalnost nacionalnost) {
+		if (nacionalnostRepository.existsById(nacionalnost.getId())) {
+			nacionalnostRepository.save(nacionalnost);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@DeleteMapping("/nacionalnost/{id}")
@@ -64,7 +64,7 @@ public class NacionalnostController {
 			nacionalnostRepository.deleteById(id);
 
 			if (id == -100) {
-				jdbcTemplate.execute("INSERT INTO nacionalnost VALUES(-11, 'Serbia',  'SRB');");
+				jdbcTemplate.execute("INSERT INTO nacionalnost VALUES(-100, 'Serbia',  'SRB');");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);
