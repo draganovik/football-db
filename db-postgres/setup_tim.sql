@@ -4,7 +4,7 @@
 -- Year founded,
 -- City,
 -- Footbal league the team is in;
--- (e.g. INSERT INTO tim VALUES(NEXTVAL('tim_id_req'), 'FC Bayern München',  to_date('1900','yyyy'), 'Munich', 'Bundesliga');)
+-- (e.g. INSERT INTO tim VALUES(NEXTVAL('tim_id_req'), 'FC Bayern München',  to_date('1900','yyyy'), 'Munich', 1);)
 -- Language: sql
 INSERT INTO tim
 VALUES(
@@ -12,7 +12,7 @@ VALUES(
         'FC Bayern München',
         to_date('1900', 'yyyy'),
         'Munich',
-        'Bundesliga'
+        1
     );
 INSERT INTO tim
 VALUES(
@@ -20,7 +20,7 @@ VALUES(
         'FC Barcelona',
         to_date('1899', 'yyyy'),
         'Barcelona',
-        'La Liga'
+        5
     );
 INSERT INTO tim
 VALUES(
@@ -28,7 +28,7 @@ VALUES(
         'Borussia Dortmund',
         to_date('1905', 'yyyy'),
         'Dortmund',
-        'Bundesliga'
+        1
     );
 INSERT INTO tim
 VALUES(
@@ -36,7 +36,7 @@ VALUES(
         'FC Köln',
         to_date('1908', 'yyyy'),
         'Köln',
-        'Bundesliga'
+        1
     );
 INSERT INTO tim
 VALUES(
@@ -44,7 +44,7 @@ VALUES(
         'FC Kaiserslautern',
         to_date('1913', 'yyyy'),
         'Kaiserslautern',
-        'Bundesliga'
+        1
     );
 INSERT INTO tim
 VALUES(
@@ -52,7 +52,7 @@ VALUES(
         'Juventus F.C.',
         to_date('1897', 'yyyy'),
         'Turin',
-        'Serie A'
+        2
     );
 INSERT INTO tim
 VALUES(
@@ -60,7 +60,7 @@ VALUES(
         'AC Milan',
         to_date('1898', 'yyyy'),
         'Milan',
-        'Serie A'
+        2
     );
 INSERT INTO tim
 VALUES(
@@ -68,7 +68,7 @@ VALUES(
         'UC Sampdoria',
         to_date('1901', 'yyyy'),
         'Sampdoria',
-        'Serie A'
+        2
     );
 INSERT INTO tim
 VALUES(
@@ -76,7 +76,7 @@ VALUES(
         'SSC Napoli',
         to_date('1903', 'yyyy'),
         'Napoli',
-        'Serie A'
+        2
     );
 INSERT INTO tim
 VALUES(
@@ -84,7 +84,7 @@ VALUES(
         'Arsenal F.C.',
         to_date('1886', 'yyyy'),
         'London',
-        'Premier League'
+        3
     );
 INSERT INTO tim
 VALUES(
@@ -92,7 +92,7 @@ VALUES(
         'Manchester United F.C.',
         to_date('1887', 'yyyy'),
         'Manchester',
-        'Premier League'
+        3
     );
 INSERT INTO tim
 VALUES(
@@ -100,7 +100,7 @@ VALUES(
         'Liverpool F.C.',
         to_date('1888', 'yyyy'),
         'Liverpool',
-        'Premier League'
+        3
     );
 INSERT INTO tim
 VALUES(
@@ -108,7 +108,7 @@ VALUES(
         'Chelsea F.C.',
         to_date('1889', 'yyyy'),
         'London',
-        'Premier League'
+        3
     );
 INSERT INTO tim
 VALUES(
@@ -116,7 +116,7 @@ VALUES(
         'AS Monaco FC',
         to_date('1924', 'yyyy'),
         'Monaco',
-        'Ligue 1'
+        4
     );
 INSERT INTO tim
 VALUES(
@@ -124,7 +124,7 @@ VALUES(
         'FC Nantes',
         to_date('1929', 'yyyy'),
         'Nantes',
-        'Ligue 1'
+        4
     );
 INSERT INTO tim
 VALUES(
@@ -132,7 +132,7 @@ VALUES(
         'Stade Rennais FC',
         to_date('1931', 'yyyy'),
         'Rennes',
-        'Ligue 1'
+        4
     );
 INSERT INTO tim
 VALUES(
@@ -140,7 +140,7 @@ VALUES(
         'Paris Saint-Germain F.C.',
         to_date('1933', 'yyyy'),
         'Paris',
-        'Ligue 1'
+        4
     );
 INSERT INTO tim
 VALUES(
@@ -148,5 +148,5 @@ VALUES(
         'Real Madrid C.F.',
         to_date('1934', 'yyyy'),
         'Madrid',
-        'La Liga'
+        5
     );

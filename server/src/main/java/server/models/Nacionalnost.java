@@ -1,15 +1,21 @@
 package server.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.List;
-
 /**
  * The persistent class for the nacionalnost database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name = "Nacionalnost.findAll", query = "SELECT n FROM Nacionalnost n")

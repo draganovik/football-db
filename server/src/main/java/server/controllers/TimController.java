@@ -15,57 +15,57 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import server.models.Liga;
-import server.repository.ILigaRepository;
+import server.models.Tim;
+import server.repository.ITimRepository;
 
 @RestController
-public class LigaController {
-
+public class TimController {
 	@Autowired
-	private ILigaRepository ligaRepository;
+	private ITimRepository timRepository;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@GetMapping("/liga")
-	public Collection<Liga> getAllLiga() {
-		return ligaRepository.findAll();
+	@GetMapping("/tim")
+	public Collection<Tim> getAllTim() {
+		return timRepository.findAll();
 	}
 
-	@GetMapping("/liga/{id}")
-	public Optional<Liga> getLigaById(@PathVariable Integer id) {
-		return ligaRepository.findById(id);
+	@GetMapping("/tim/{id}")
+	public Optional<Tim> getTimById(@PathVariable Integer id) {
+		return timRepository.findById(id);
 	}
 
 	/*
-	 * @GetMapping("ligaNaziv/{naziv}") public Collection<Liga>
-	 * getLigaiByNaziv(@PathVariable("naziv") String naziv) { return
-	 * ligaRepository.findByNazivContainingIgnoreCase(naziv); }
+	 * @GetMapping("timNaziv/{naziv}") public Collection<Tim>
+	 * getTimiByNaziv(@PathVariable("naziv") String naziv) { return
+	 * timRepository.findByNazivContainingIgnoreCase(naziv); }
 	 */
-	@PostMapping("Liga")
-	public ResponseEntity<Liga> insertLiga(@RequestBody Liga Liga) {
-		if (!ligaRepository.existsById(Liga.getId())) {
-			ligaRepository.save(Liga);
+	@PostMapping("Tim")
+	public ResponseEntity<Tim> insertTim(@RequestBody Tim Tim) {
+		if (!timRepository.existsById(Tim.getId())) {
+			timRepository.save(Tim);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@PutMapping("Liga")
-	public ResponseEntity<Liga> updateLiga(@RequestBody Liga Liga) {
-		if (ligaRepository.existsById(Liga.getId())) {
-			ligaRepository.save(Liga);
+	@PutMapping("Tim")
+	public ResponseEntity<Tim> updateTim(@RequestBody Tim Tim) {
+		if (timRepository.existsById(Tim.getId())) {
+			timRepository.save(Tim);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
-	@DeleteMapping("Liga/{id}")
-	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {
-		if (ligaRepository.existsById(id)) {
-			ligaRepository.deleteById(id);
+	@DeleteMapping("Tim/{id}")
+	public ResponseEntity<Tim> deleteTim(@PathVariable("id") Integer id) {
+		if (timRepository.existsById(id)) {
+			timRepository.deleteById(id);
 
 			if (id == -100) {
-				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Loga', 'SRB');");
+				jdbcTemplate.execute(
+						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', 'Super Liga' );");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);

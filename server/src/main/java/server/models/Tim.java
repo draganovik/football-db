@@ -1,13 +1,26 @@
 package server.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the tim database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name = "Tim.findAll", query = "SELECT t FROM Tim t")
@@ -28,6 +41,7 @@ public class Tim implements Serializable {
 
 	// bi-directional many-to-one association to Igrac
 	@OneToMany(mappedBy = "tim")
+	@JsonIgnore
 	private List<Igrac> igracs;
 
 	// bi-directional many-to-one association to Liga
