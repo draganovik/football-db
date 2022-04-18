@@ -52,51 +52,35 @@ public class Tim implements Serializable {
 	public Tim() {
 	}
 
+	public Igrac addIgrac(Igrac igrac) {
+		getIgracs().add(igrac);
+		igrac.setTim(this);
+
+		return igrac;
+	}
+
 	public Integer getId() {
 		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNaziv() {
-		return this.naziv;
-	}
-
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-
-	public Date getOsnovan() {
-		return this.osnovan;
-	}
-
-	public void setOsnovan(Date osnovan) {
-		this.osnovan = osnovan;
-	}
-
-	public String getSediste() {
-		return this.sediste;
-	}
-
-	public void setSediste(String sediste) {
-		this.sediste = sediste;
 	}
 
 	public List<Igrac> getIgracs() {
 		return this.igracs;
 	}
 
-	public void setIgracs(List<Igrac> igracs) {
-		this.igracs = igracs;
+	public Liga getLiga() {
+		return this.liga;
 	}
 
-	public Igrac addIgrac(Igrac igrac) {
-		getIgracs().add(igrac);
-		igrac.setTim(this);
+	public String getNaziv() {
+		return this.naziv;
+	}
 
-		return igrac;
+	public Date getOsnovan() {
+		return this.osnovan;
+	}
+
+	public String getSediste() {
+		return this.sediste;
 	}
 
 	public Igrac removeIgrac(Igrac igrac) {
@@ -106,12 +90,28 @@ public class Tim implements Serializable {
 		return igrac;
 	}
 
-	public Liga getLiga() {
-		return this.liga;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIgracs(List<Igrac> igracs) {
+		this.igracs = igracs;
 	}
 
 	public void setLiga(Liga liga) {
 		this.liga = liga;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+
+	public void setOsnovan(Date osnovan) {
+		this.osnovan = osnovan;
+	}
+
+	public void setSediste(String sediste) {
+		this.sediste = sediste;
 	}
 
 }

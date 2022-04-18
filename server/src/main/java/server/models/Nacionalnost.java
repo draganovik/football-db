@@ -39,38 +39,6 @@ public class Nacionalnost implements Serializable {
 	public Nacionalnost() {
 	}
 
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNaziv() {
-		return this.naziv;
-	}
-
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-
-	public String getSkracenica() {
-		return this.skracenica;
-	}
-
-	public void setSkracenica(String skracenica) {
-		this.skracenica = skracenica;
-	}
-
-	public List<Igrac> getIgracs() {
-		return this.igracs;
-	}
-
-	public void setIgracs(List<Igrac> igracs) {
-		this.igracs = igracs;
-	}
-
 	public Igrac addIgrac(Igrac igrac) {
 		getIgracs().add(igrac);
 		igrac.setNacionalnost(this);
@@ -78,11 +46,43 @@ public class Nacionalnost implements Serializable {
 		return igrac;
 	}
 
+	public Integer getId() {
+		return this.id;
+	}
+
+	public List<Igrac> getIgracs() {
+		return this.igracs;
+	}
+
+	public String getNaziv() {
+		return this.naziv;
+	}
+
+	public String getSkracenica() {
+		return this.skracenica;
+	}
+
 	public Igrac removeIgrac(Igrac igrac) {
 		getIgracs().remove(igrac);
 		igrac.setNacionalnost(null);
 
 		return igrac;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIgracs(List<Igrac> igracs) {
+		this.igracs = igracs;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+
+	public void setSkracenica(String skracenica) {
+		this.skracenica = skracenica;
 	}
 
 }

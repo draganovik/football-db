@@ -15,50 +15,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import server.models.Igrac;
 import server.repository.IIgracRepository;
 
 @RestController
+@Api(tags = { "CRUD Operacije: IGRAC" })
 public class IgracController {
+
 	@Autowired
 	private IIgracRepository igracRepository;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@GetMapping("/igrac")
-	public Collection<Igrac> getAllIgrac() {
-		return igracRepository.findAll();
-	}
-
-	@GetMapping("/igrac/{id}")
-	public Optional<Igrac> getIgracById(@PathVariable Integer id) {
-		return igracRepository.findById(id);
-	}
-
-	@GetMapping("/igrac/ime/{ime}")
-	public Collection<Igrac> getIgraciByNaziv(@PathVariable("ime") String ime) {
-		return igracRepository.findByImeContainingIgnoreCase(ime);
-	}
-
-	@PostMapping("/igrac")
-	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
-		if (igrac.getId() == null) {
-			igracRepository.save(igrac);
-			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
-	}
-
-	@PutMapping("/igrac")
-	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac igrac) {
-		if (igracRepository.existsById(igrac.getId())) {
-			igracRepository.save(igrac);
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-
 	@DeleteMapping("/igrac/{id}")
+	@ApiOperation(value = "Briše igraca u odnosu na vrednost posleđene path varijable id.")
 	public ResponseEntity<Igrac> deleteIgrac(@PathVariable("id") Integer id) {
 		if (igracRepository.existsById(id)) {
 			igracRepository.deleteById(id);
@@ -71,5 +43,43 @@ public class IgracController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@GetMapping("/igrac")
+	@ApiOperation(value = "Vraća kolekciju svih igraca iz baze podataka.")
+	public Collection<Igrac> getAllIgrac() {
+		return igracRepository.findAll();
+	}
+
+	@GetMapping("/igrac/{id}")
+	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable id.")
+	public Optional<Igrac> getIgracById(@PathVariable Integer id) {
+		return igracRepository.findById(id);
+	}
+
+	@GetMapping("/igrac/ime/{ime}")
+	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable ime.")
+	public Collection<Igrac> getIgraciByIme(@PathVariable("ime") String ime) {
+		return igracRepository.findByImeContainingIgnoreCase(ime);
+	}
+
+	@PostMapping("/igrac")
+	@ApiOperation(value = "Dodaje novg igraca u bazu podataka.")
+	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
+		if (igrac.getId() == null) {
+			igracRepository.save(igrac);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>(HttpStatus.CONFLICT);
+	}
+
+	@PutMapping("/igrac")
+	@ApiOperation(value = "Ažurira postojećeg igraca.")
+	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac igrac) {
+		if (igracRepository.existsById(igrac.getId())) {
+			igracRepository.save(igrac);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

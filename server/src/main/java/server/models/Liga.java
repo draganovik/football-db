@@ -41,38 +41,6 @@ public class Liga implements Serializable {
 	public Liga() {
 	}
 
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNaziv() {
-		return this.naziv;
-	}
-
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-
-	public String getOznaka() {
-		return this.oznaka;
-	}
-
-	public void setOznaka(String oznaka) {
-		this.oznaka = oznaka;
-	}
-
-	public List<Tim> getTims() {
-		return this.tims;
-	}
-
-	public void setTims(List<Tim> tims) {
-		this.tims = tims;
-	}
-
 	public Tim addTim(Tim tim) {
 		getTims().add(tim);
 		tim.setLiga(this);
@@ -80,11 +48,43 @@ public class Liga implements Serializable {
 		return tim;
 	}
 
+	public Integer getId() {
+		return this.id;
+	}
+
+	public String getNaziv() {
+		return this.naziv;
+	}
+
+	public String getOznaka() {
+		return this.oznaka;
+	}
+
+	public List<Tim> getTims() {
+		return this.tims;
+	}
+
 	public Tim removeTim(Tim tim) {
 		getTims().remove(tim);
 		tim.setLiga(null);
 
 		return tim;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+
+	public void setOznaka(String oznaka) {
+		this.oznaka = oznaka;
+	}
+
+	public void setTims(List<Tim> tims) {
+		this.tims = tims;
 	}
 
 }
