@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import io.swagger.annotations.ApiOperation;
 import server.models.Tim;
 import server.repository.ITimRepository;
 
+@CrossOrigin
 @RestController
 @Api(tags = { "CRUD Operacije: TIM" })
 public class TimController {
@@ -37,7 +39,7 @@ public class TimController {
 
 			if (id == -100) {
 				jdbcTemplate.execute(
-						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', 'Super Liga');");
+						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', 1)");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);

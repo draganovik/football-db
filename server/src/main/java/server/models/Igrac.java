@@ -3,6 +3,7 @@ package server.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,18 +16,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * The persistent class for the igrac database table.
  *
  */
 @Entity
 @NamedQuery(name = "Igrac.findAll", query = "SELECT i FROM Igrac i")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Igrac implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name = "IGRAC_ID_GENERATOR", sequenceName = "IGRAC_ID_REQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IGRAC_ID_GENERATOR")
+	@AttributeOverride(name = "id", column = @Column(name = "ID"))
 	private Integer id;
 
 	@Column(name = "broj_reg")

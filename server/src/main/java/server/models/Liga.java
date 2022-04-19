@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @NamedQuery(name = "Liga.findAll", query = "SELECT l FROM Liga l")
-@JsonIgnoreProperties({ "handler" })
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Liga implements Serializable {
 	private static final long serialVersionUID = 1L;
 

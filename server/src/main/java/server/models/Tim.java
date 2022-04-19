@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the tim database table.
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @NamedQuery(name = "Tim.findAll", query = "SELECT t FROM Tim t")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Tim implements Serializable {
 	private static final long serialVersionUID = 1L;
 

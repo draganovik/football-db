@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the nacionalnost database table.
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @NamedQuery(name = "Nacionalnost.findAll", query = "SELECT n FROM Nacionalnost n")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Nacionalnost implements Serializable {
 	private static final long serialVersionUID = 1L;
 

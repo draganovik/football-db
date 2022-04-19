@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import io.swagger.annotations.ApiOperation;
 import server.models.Liga;
 import server.repository.ILigaRepository;
 
+@CrossOrigin
 @RestController
 @Api(tags = { "CRUD Operacije: LIGA" })
 public class LigaController {
@@ -36,7 +38,7 @@ public class LigaController {
 			ligaRepository.deleteById(id);
 
 			if (id == -100) {
-				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Liga', 'SRB');");
+				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Liga', 'SRB')");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);

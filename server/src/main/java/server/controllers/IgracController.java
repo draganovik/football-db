@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import server.models.Igrac;
+import server.models.Tim;
 import server.repository.IIgracRepository;
+import server.repository.ITimRepository;
 
+@CrossOrigin
 @RestController
 @Api(tags = { "CRUD Operacije: IGRAC" })
 public class IgracController {
@@ -28,6 +32,8 @@ public class IgracController {
 	private IIgracRepository igracRepository;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private ITimRepository timRepository;
 
 	@DeleteMapping("/igrac/{id}")
 	@ApiOperation(value = "Briše igraca u odnosu na vrednost posleđene path varijable id.")
@@ -37,11 +43,12 @@ public class IgracController {
 
 			if (id == -100) {
 				jdbcTemplate.execute(
-						"INSERT INTO igrac VALUES(-100, 'Nemanja', 'Matic', 1, to_date('1.8.1988', 'dd.MM.yyyy'), 1, 'Radnički');");
+						"INSERT INTO igrac VALUES(-100, 'Nemanja', 'Matic', 1, to_date('1.8.1988', 'dd.MM.yyyy'), 1, 1)");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
+		System.out.print(igracRepository.getOne(id));
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -57,20 +64,33 @@ public class IgracController {
 		return igracRepository.findById(id);
 	}
 
+	@GetMapping("/igrac/brojreg/{brojreg}")
+	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable brojreg.")
+	public Collection<Igrac> getIgraciByBrojReg(@PathVariable("brojreg") String brojreg) {
+		return igracRepository.findByBrojReg(brojreg);
+	}
+
 	@GetMapping("/igrac/ime/{ime}")
 	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable ime.")
 	public Collection<Igrac> getIgraciByIme(@PathVariable("ime") String ime) {
 		return igracRepository.findByImeContainingIgnoreCase(ime);
 	}
 
+	@GetMapping("/igrac/tim/{tim}")
+	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable tim.")
+	public Collection<Igrac> getIgraciByTim(@PathVariable("tim") int timid) {
+		Tim temp = timRepository.getOne(timid);
+		return igracRepository.findByTim(temp);
+	}
+
 	@PostMapping("/igrac")
 	@ApiOperation(value = "Dodaje novg igraca u bazu podataka.")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
-		if (igrac.getId() == null) {
-			igracRepository.save(igrac);
-			return new ResponseEntity<>(HttpStatus.CREATED);
+		if (igracRepository.existsById(igrac.getId()) && igracRepository.existsByBrojReg(igrac.getBrojReg())) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
+		igracRepository.save(igrac);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PutMapping("/igrac")
