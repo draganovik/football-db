@@ -43,7 +43,7 @@ public class IgracController {
 
 			if (id == -100) {
 				jdbcTemplate.execute(
-						"INSERT INTO igrac VALUES(-100, 'Nemanja', 'Matic', 1, to_date('1.8.1988', 'dd.MM.yyyy'), 1, 1)");
+						"INSERT INTO igrac VALUES(-100, 'Nemanja', 'Matic', '1', to_date('1.8.1988', 'dd.MM.yyyy'), -99, -99)");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -55,7 +55,13 @@ public class IgracController {
 	@GetMapping("/igrac")
 	@ApiOperation(value = "Vraća kolekciju svih igraca iz baze podataka.")
 	public Collection<Igrac> getAllIgrac() {
-		return igracRepository.findAll();
+		return igracRepository.findAllValid();
+	}
+
+	@GetMapping("/igrac/brojreg/{brojreg}")
+	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable brojreg.")
+	public Collection<Igrac> getIgracByBrojReg(@PathVariable("brojreg") String brojreg) {
+		return igracRepository.findByBrojReg(brojreg);
 	}
 
 	@GetMapping("/igrac/{id}")
@@ -64,33 +70,37 @@ public class IgracController {
 		return igracRepository.findById(id);
 	}
 
-	@GetMapping("/igrac/brojreg/{brojreg}")
-	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable brojreg.")
-	public Collection<Igrac> getIgraciByBrojReg(@PathVariable("brojreg") String brojreg) {
-		return igracRepository.findByBrojReg(brojreg);
-	}
-
 	@GetMapping("/igrac/ime/{ime}")
 	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable ime.")
-	public Collection<Igrac> getIgraciByIme(@PathVariable("ime") String ime) {
+	public Collection<Igrac> getIgracByIme(@PathVariable("ime") String ime) {
 		return igracRepository.findByImeContainingIgnoreCase(ime);
 	}
 
 	@GetMapping("/igrac/tim/{tim}")
 	@ApiOperation(value = "Vraća igraca u odnosu na posleđenu vrednost path varijable tim.")
-	public Collection<Igrac> getIgraciByTim(@PathVariable("tim") int timid) {
-		Tim temp = timRepository.getOne(timid);
-		return igracRepository.findByTim(temp);
+	public ResponseEntity<Collection<Igrac>> getIgracByTimId(@PathVariable("tim") Integer timid) {
+		if (!timRepository.existsById(timid)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		Optional<Tim> temp = timRepository.findById(timid);
+		return new ResponseEntity<>(igracRepository.findByTim(temp), HttpStatus.OK);
 	}
 
 	@PostMapping("/igrac")
 	@ApiOperation(value = "Dodaje novg igraca u bazu podataka.")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
-		if (igracRepository.existsById(igrac.getId()) && igracRepository.existsByBrojReg(igrac.getBrojReg())) {
-			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		if (igrac.getId() == null && !igracRepository.existsByBrojReg(igrac.getBrojReg())) {
+			igracRepository.save(igrac);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
-		igracRepository.save(igrac);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		if (igrac.getId() == -100) {
+			igrac.setId(null);
+			Igrac temp = igracRepository.save(igrac);
+			jdbcTemplate.execute("DELETE FROM igrac WHERE id=" + temp.getId());
+			return new ResponseEntity<>(temp, HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>(HttpStatus.CONFLICT);
+
 	}
 
 	@PutMapping("/igrac")

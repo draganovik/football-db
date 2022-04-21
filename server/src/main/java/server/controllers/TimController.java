@@ -39,7 +39,7 @@ public class TimController {
 
 			if (id == -100) {
 				jdbcTemplate.execute(
-						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', 1)");
+						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', -99)");
 			}
 
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -50,7 +50,7 @@ public class TimController {
 	@GetMapping("/tim")
 	@ApiOperation(value = "Vraća kolekciju svih timova iz baze podataka.")
 	public Collection<Tim> getAllTim() {
-		return timRepository.findAll();
+		return timRepository.findAllValid();
 	}
 
 	@GetMapping("/tim/{id}")
@@ -71,6 +71,12 @@ public class TimController {
 		if (tim.getId() == null) {
 			timRepository.save(tim);
 			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+		if (tim.getId() == -100) {
+			tim.setId(null);
+			Tim temp = timRepository.save(tim);
+			jdbcTemplate.execute("DELETE FROM tim WHERE id=" + temp.getId());
+			return new ResponseEntity<>(temp, HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}

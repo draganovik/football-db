@@ -49,7 +49,7 @@ public class NacionalnostController {
 	@GetMapping("/nacionalnost")
 	@ApiOperation(value = "Vraća kolekciju svih nacionalnosti iz baze podataka.")
 	public Collection<Nacionalnost> getAllNacionalnost() {
-		return nacionalnostRepository.findAll();
+		return nacionalnostRepository.findAllValid();
 	}
 
 	@GetMapping("/nacionalnost/{id}")
@@ -70,6 +70,12 @@ public class NacionalnostController {
 		if (nacionalnost.getId() == null) {
 			nacionalnostRepository.save(nacionalnost);
 			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+		if (nacionalnost.getId() == -100) {
+			nacionalnost.setId(null);
+			Nacionalnost temp = nacionalnostRepository.save(nacionalnost);
+			jdbcTemplate.execute("DELETE FROM nacionalnost WHERE id=" + temp.getId());
+			return new ResponseEntity<>(temp, HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}

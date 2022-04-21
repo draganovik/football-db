@@ -36,7 +36,6 @@ public class LigaController {
 	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {
 		if (ligaRepository.existsById(id)) {
 			ligaRepository.deleteById(id);
-
 			if (id == -100) {
 				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Liga', 'SRB')");
 			}
@@ -49,7 +48,7 @@ public class LigaController {
 	@GetMapping("/liga")
 	@ApiOperation(value = "Vraća kolekciju svih liga iz baze podataka.")
 	public Collection<Liga> getAllLiga() {
-		return ligaRepository.findAll();
+		return ligaRepository.findAllValid();
 	}
 
 	@GetMapping("/liga/{id}")
@@ -69,6 +68,12 @@ public class LigaController {
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
 		if (liga.getId() == null) {
 			Liga temp = ligaRepository.save(liga);
+			return new ResponseEntity<>(temp, HttpStatus.CREATED);
+		}
+		if (liga.getId() == -100) {
+			liga.setId(null);
+			Liga temp = ligaRepository.save(liga);
+			jdbcTemplate.execute("DELETE FROM liga WHERE id=" + temp.getId());
 			return new ResponseEntity<>(temp, HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
