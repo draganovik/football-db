@@ -68,15 +68,14 @@ public class TimController {
 	@PostMapping("/tim")
 	@ApiOperation(value = "Dodaje novi tim u bazu podataka.")
 	public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
-		if (tim.getId() == null) {
-			timRepository.save(tim);
-			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		if (tim.getId() == -100) {
+		boolean isTest = tim.getId() == -100;
+		if (tim.getId() == null || isTest) {
 			tim.setId(null);
 			Tim temp = timRepository.save(tim);
-			jdbcTemplate.execute("DELETE FROM tim WHERE id=" + temp.getId());
-			return new ResponseEntity<>(temp, HttpStatus.CREATED);
+			if (isTest) {
+				jdbcTemplate.execute("DELETE FROM tim WHERE id=" + temp.getId());
+			}
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}

@@ -67,15 +67,14 @@ public class NacionalnostController {
 	@PostMapping("/nacionalnost")
 	@ApiOperation(value = "Dodaje novu nacionalnost u bazu podataka.")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost nacionalnost) {
-		if (nacionalnost.getId() == null) {
-			nacionalnostRepository.save(nacionalnost);
-			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		if (nacionalnost.getId() == -100) {
+		boolean isTest = nacionalnost.getId() == -100;
+		if (nacionalnost.getId() == null || isTest) {
 			nacionalnost.setId(null);
 			Nacionalnost temp = nacionalnostRepository.save(nacionalnost);
-			jdbcTemplate.execute("DELETE FROM nacionalnost WHERE id=" + temp.getId());
-			return new ResponseEntity<>(temp, HttpStatus.CREATED);
+			if (isTest) {
+				jdbcTemplate.execute("DELETE FROM nacionalnost WHERE id=" + temp.getId());
+			}
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}

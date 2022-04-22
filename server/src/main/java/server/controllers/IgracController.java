@@ -89,15 +89,14 @@ public class IgracController {
 	@PostMapping("/igrac")
 	@ApiOperation(value = "Dodaje novg igraca u bazu podataka.")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
-		if (igrac.getId() == null && !igracRepository.existsByBrojReg(igrac.getBrojReg())) {
-			igracRepository.save(igrac);
-			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		if (igrac.getId() == -100) {
+		boolean isTest = igrac.getId() == -100;
+		if ((igrac.getId() == null && !igracRepository.existsByBrojReg(igrac.getBrojReg())) || isTest) {
 			igrac.setId(null);
 			Igrac temp = igracRepository.save(igrac);
-			jdbcTemplate.execute("DELETE FROM igrac WHERE id=" + temp.getId());
-			return new ResponseEntity<>(temp, HttpStatus.CREATED);
+			if (isTest) {
+				jdbcTemplate.execute("DELETE FROM igrac WHERE id=" + temp.getId());
+			}
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 

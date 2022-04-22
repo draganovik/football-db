@@ -66,14 +66,13 @@ public class LigaController {
 	@PostMapping("/liga")
 	@ApiOperation(value = "Dodaje novu ligu u bazu podataka.")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
-		if (liga.getId() == null) {
-			Liga temp = ligaRepository.save(liga);
-			return new ResponseEntity<>(temp, HttpStatus.CREATED);
-		}
-		if (liga.getId() == -100) {
+		boolean isTest = liga.getId() == -100;
+		if (liga.getId() == null || isTest) {
 			liga.setId(null);
 			Liga temp = ligaRepository.save(liga);
-			jdbcTemplate.execute("DELETE FROM liga WHERE id=" + temp.getId());
+			if (isTest) {
+				jdbcTemplate.execute("DELETE FROM liga WHERE id=" + temp.getId());
+			}
 			return new ResponseEntity<>(temp, HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
