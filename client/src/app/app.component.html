@@ -1,13 +1,17 @@
-<header class="h-20 justify-between bg-slate-800 px-4 flex text-center">
+<header class="flex h-20 justify-between bg-slate-800 px-4 text-center">
   <div class="flex items-center">
-    <h1 class="text-white text-2xl font-bold">
+    <h1 class="text-2xl font-bold text-white">
       {{ title }}
     </h1>
   </div>
 </header>
-<main></main>
+<main>
+  <router-outlet></router-outlet>
+</main>
 <footer>
-  <div class="w-full h-32 grid place-content-center bg-slate-800">
-    <p class="font-light text-white">Mladen Draganović IT68/2019 &copy; {{ year }}</p>
+  <div class="grid h-32 w-full place-content-center bg-slate-800">
+    <p class="font-light text-white">
+      Mladen Draganović IT68/2019 &copy; {{ year }}
+    </p>
   </div>
 </footer>
