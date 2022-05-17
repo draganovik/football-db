@@ -1,9 +1,4 @@
-<header
-  class="flex h-20 justify-between bg-slate-800 px-4 text-center dark:bg-slate-900"
->
-  <div class="flex items-center">
-    <h1 class="text-2xl font-bold text-white">
-      {{ title }}
-    </h1>
-  </div>
-</header>
+<mat-toolbar>
+  <ng-content></ng-content>
+  <span>{{ title }}</span>
+</mat-toolbar>

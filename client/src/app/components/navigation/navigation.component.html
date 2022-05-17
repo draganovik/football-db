@@ -1,0 +1,88 @@
+<mat-nav-list>
+  <h1 mat-subheader>RVA Client</h1>
+  <h2 mat-subheader>Evidencija igrača</h2>
+  <a mat-list-item routerLink="/leagues">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_leaderboard="routerLinkActive"
+      class="{{
+        rla_leaderboard.isActive
+          ? 'material-icons-filled'
+          : 'material-icons-outlined inactive'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >leaderboard</mat-icon
+    >
+    <span mat-line>Lige</span>
+  </a>
+  <a mat-list-item routerLink="/teams">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_workspaces="routerLinkActive"
+      class="{{
+        rla_workspaces.isActive
+          ? 'material-icons-filled'
+          : 'material-icons-outlined'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >workspaces</mat-icon
+    >
+    <span mat-line>Timovi</span>
+  </a>
+  <a mat-list-item routerLink="/nationalities">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_flag="routerLinkActive"
+      class="{{
+        rla_flag.isActive ? 'material-icons-filled' : 'material-icons-outlined'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >flag</mat-icon
+    >
+    <span mat-line>Nacionalnosti</span>
+  </a>
+  <mat-divider></mat-divider>
+  <h2 mat-subheader>Informacije o aplikaciji</h2>
+  <a mat-list-item routerLink="">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_home="routerLinkActive"
+      class="{{
+        rla_home.isActive ? 'material-icons-filled' : 'material-icons-outlined'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >home</mat-icon
+    >
+    <span mat-line>Početna</span>
+  </a>
+  <a mat-list-item routerLink="/about">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_info="routerLinkActive"
+      class="{{
+        rla_info.isActive ? 'material-icons-filled' : 'material-icons-outlined'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >info</mat-icon
+    >
+    <span mat-line>Informacije</span>
+  </a>
+  <a mat-list-item routerLink="/author">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_face="routerLinkActive"
+      class="{{
+        rla_face.isActive ? 'material-icons-filled' : 'material-icons-outlined'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >face</mat-icon
+    >
+    <span mat-line>O Autoru</span>
+  </a>
+</mat-nav-list>

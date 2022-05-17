@@ -1,0 +1,9 @@
+:host /deep/ .mat-list-item-content {
+  padding-right: 5rem !important;
+}
+
+h1 {
+  font-size: 1.2rem !important;
+  margin-top: 0.2rem !important;
+  color: mat-color($color-error, lighter);
+}

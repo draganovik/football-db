@@ -1,50 +1,16 @@
-<app-header title="{{ title }}"></app-header>
-<main>
-  <router-outlet></router-outlet>
-  <mat-sidenav-container
-    class="absolute top-0 bottom-0 left-0 cursor-pointer border"
-  >
-    <mat-sidenav mode="over" [fixedInViewport]="true" opened mode="side">
-      <mat-accordion>
-        <a mat-button class="text-center">
-          <mat-icon> Home </mat-icon>
-        </a>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Aplikacija </mat-panel-title>
-            <mat-panel-description>
-              Aplikacija za evidenciju igrača
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-            <a mat-raised-button>Lige</a>
-          </mat-nav-list>
-          <mat-nav-list>
-            <a mat-raised-button>Timovi</a>
-          </mat-nav-list>
-          <mat-nav-list>
-            <a mat-raised-button>Nacionalnost</a>
-          </mat-nav-list>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title class="text-left">Informacije</mat-panel-title>
-            <mat-panel-description>
-              Osnovne informacije o aplikaciji
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-nav-list>
-            <a mat-button>O nama</a>
-          </mat-nav-list>
-          <mat-nav-list>
-            <a mat-button>Autor</a>
-          </mat-nav-list>
-          <mat-nav-list>
-            <a mat-button>Pocetna</a>
-          </mat-nav-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-sidenav>
-  </mat-sidenav-container>
-</main>
-<app-footer year="{{ year }}"></app-footer>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side" opened>
+    <app-navigation title="{{ title }}"></app-navigation>
+  </mat-drawer>
+  <div class="page-container">
+    <router-outlet>
+      <app-header title="{{ title }}">
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >menu</mat-icon
+          >
+        </button></app-header
+      >
+    </router-outlet>
+  </div>
+</mat-drawer-container>
