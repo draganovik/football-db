@@ -18,7 +18,8 @@ import { AboutComponent } from './pages/about/about.component'
 import { HomeComponent } from './pages/home/home.component'
 import { NationalitiesComponent } from './pages/nationalities/nationalities.component'
 import { TeamsComponent } from './pages/teams/teams.component'
-import { LeaguesComponent } from './pages/leagues/leagues.component'
+import { LeaguesComponent } from './pages/leagues/leagues.component';
+import { AuthorComponent } from './pages/author/author.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LeaguesComponent } from './pages/leagues/leagues.component'
     HomeComponent,
     NationalitiesComponent,
     TeamsComponent,
-    LeaguesComponent
+    LeaguesComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,
