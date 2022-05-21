@@ -1,10 +1,10 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="side" opened>
-    <app-navigation title="{{ title }}"></app-navigation>
+    <app-navigation></app-navigation>
   </mat-drawer>
   <div class="page-container">
     <router-outlet>
-      <app-header title="{{ title }}">
+      <app-header title="{{ titleService.getTitle() }}">
         <button type="button" mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-hidden="false" aria-label="Example home icon"
             >menu</mat-icon

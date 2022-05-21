@@ -9,5 +9,5 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  @Input() title!: String
+  @Input() title!: String | 'RVA Client'
 }

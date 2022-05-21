@@ -9,16 +9,25 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { TeamsComponent } from './pages/teams/teams.component'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, data: { title: 'Home' } },
   {
-    path: 'about',
-    component: AboutComponent
+    path: 'info',
+    component: AboutComponent,
+    data: { title: 'Informacije' }
   },
-  { path: 'author', component: AuthorComponent },
-  { path: 'teams', component: TeamsComponent },
-  { path: 'leagues', component: LeaguesComponent },
-  { path: 'nationalities', component: NationalitiesComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'autor', component: AuthorComponent, data: { title: 'Autor' } },
+  { path: 'timovi', component: TeamsComponent, data: { title: 'Timovi' } },
+  { path: 'lige', component: LeaguesComponent, data: { title: 'Lige' } },
+  {
+    path: 'nacionalnosti',
+    component: NationalitiesComponent,
+    data: { title: 'Nacionalnosti' }
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+    data: { title: 'Stranica nije pronađena' }
+  }
 ]
 
 @NgModule({
