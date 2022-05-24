@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatTableModule } from '@angular/material/table'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AboutComponent } from './pages/about/about.component'
@@ -21,8 +22,9 @@ import { HomeComponent } from './pages/home/home.component'
 import { NationalitiesComponent } from './pages/nationalities/nationalities.component'
 import { TeamsComponent } from './pages/teams/teams.component'
 import { LeaguesComponent } from './pages/leagues/leagues.component'
-import { AuthorComponent } from './pages/author/author.component';
+import { AuthorComponent } from './pages/author/author.component'
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -48,7 +50,10 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     MatGridListModule,
     MatExpansionModule,
     MatToolbarModule,
-    BrowserAnimationsModule
+    MatTableModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

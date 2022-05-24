@@ -9,7 +9,12 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { TeamsComponent } from './pages/teams/teams.component'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: { title: 'Home' } },
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full',
+    data: { title: 'Početna' }
+  },
   {
     path: 'info',
     component: AboutComponent,
