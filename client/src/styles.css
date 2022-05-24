@@ -19,6 +19,6 @@ mat-sidenav {
 }
 
 main {
-  padding: 1rem;
-  padding-top: 5rem;
+  padding: 5rem 1rem;
+  min-height: 100vh;
 }
