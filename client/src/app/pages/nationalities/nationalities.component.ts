@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { Subscription } from 'rxjs'
+import { NationalitiesDialogComponent } from 'src/app/components/nationalities-dialog/nationalities-dialog.component'
 import { Nationalities } from 'src/app/models/nationalities'
 import { NationalitiesService } from 'src/app/services/nationalities.service'
 
@@ -14,7 +16,10 @@ export class NationalitiesComponent implements OnInit, OnDestroy {
   displayedColumns = ['id', 'naziv', 'skracenica', 'actions']
   subscription!: Subscription
 
-  constructor(private nationalitiesService: NationalitiesService) {}
+  constructor(
+    private nationalitiesService: NationalitiesService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
@@ -33,5 +38,24 @@ export class NationalitiesComponent implements OnInit, OnDestroy {
       (error: Error) => {
         console.log(error.name + ' ' + error.message)
       }
+  }
+
+  public openDialog(
+    flag: number,
+    id?: number,
+    naziv?: string,
+    skracenica?: string
+  ) {
+    const dialogRef = this.dialog.open(NationalitiesDialogComponent, {
+      data: {
+        id,
+        naziv,
+        skracenica
+      }
+    })
+    dialogRef.componentInstance.flag = flag
+    dialogRef.afterClosed().subscribe((result) => {
+      this.loadData()
+    })
   }
 }

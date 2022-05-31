@@ -15,6 +15,11 @@ import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTableModule } from '@angular/material/table'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { FormsModule } from '@angular/forms'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AboutComponent } from './pages/about/about.component'
@@ -25,6 +30,7 @@ import { LeaguesComponent } from './pages/leagues/leagues.component'
 import { AuthorComponent } from './pages/author/author.component'
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component'
 import { HttpClientModule } from '@angular/common/http'
+import { NationalitiesDialogComponent } from './components/nationalities-dialog/nationalities-dialog.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http'
     TeamsComponent,
     LeaguesComponent,
     AuthorComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NationalitiesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,12 @@ import { HttpClientModule } from '@angular/common/http'
     MatTableModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

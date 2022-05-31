@@ -1,5 +1,5 @@
 export class Nationalities {
-  id!: Number
+  id!: number
   naziv!: string
   skracenica!: string
 }

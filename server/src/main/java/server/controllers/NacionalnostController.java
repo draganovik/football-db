@@ -68,7 +68,7 @@ public class NacionalnostController {
 	@ApiOperation(value = "Dodaje novu nacionalnost u bazu podataka.")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		boolean isTest = nacionalnost.getId() == -100;
-		if (nacionalnost.getId() == null || isTest) {
+		if (nacionalnost.getId() == null || nacionalnost.getId() == 0 || isTest) {
 			nacionalnost.setId(null);
 			Nacionalnost temp = nacionalnostRepository.save(nacionalnost);
 			if (isTest) {
@@ -76,6 +76,7 @@ public class NacionalnostController {
 			}
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
+		System.out.print(nacionalnost.getId());
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 
