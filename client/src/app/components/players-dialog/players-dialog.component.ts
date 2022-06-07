@@ -2,35 +2,43 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Nationality } from 'src/app/models/nationality'
+import { Player } from 'src/app/models/player'
 import { NationalitiesService } from 'src/app/services/nationalities.service'
+import { PlayersService } from 'src/app/services/players.service'
 
 @Component({
-  selector: 'app-nationalities-dialog',
-  templateUrl: './nationalities-dialog.component.html',
-  styleUrls: ['./nationalities-dialog.component.css']
+  selector: 'app-players-dialog',
+  templateUrl: './players-dialog.component.html',
+  styleUrls: ['./players-dialog.component.css']
 })
-export class NationalitiesDialogComponent implements OnInit {
+export class PlayersDialogComponent implements OnInit {
   flag!: number
+  nationalities!: Nationality[]
 
   constructor(
     public snackbar: MatSnackBar,
-    public dialogRef: MatDialogRef<NationalitiesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Nationality,
+    public dialogRef: MatDialogRef<PlayersDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Player,
+    public playersService: PlayersService,
     public nationalitiesService: NationalitiesService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.nationalitiesService.getAllNationalities().subscribe((data) => {
+      this.nationalities = data
+    })
+  }
+
+  public complare(a: any, b: any) {
+    return a.id == b.id
+  }
 
   public add() {
-    this.nationalitiesService.addNationality(this.data).subscribe((data) => {
+    this.playersService.addPlayer(this.data).subscribe((data) => {
       console.log(this.data)
-      this.snackbar.open(
-        'Uspešno dodata vrednost: ' + this.data.naziv,
-        'Važi',
-        {
-          duration: 3500
-        }
-      )
+      this.snackbar.open('Uspešno dodata vrednost: ' + this.data.ime, 'Važi', {
+        duration: 3500
+      })
       this.dialogRef.close()
     }),
       (error: Error) => {
@@ -41,14 +49,10 @@ export class NationalitiesDialogComponent implements OnInit {
       }
   }
   public update() {
-    this.nationalitiesService.updateNationality(this.data).subscribe((data) => {
-      this.snackbar.open(
-        'Uspešno dodata vrednost: ' + this.data.naziv,
-        'Važi',
-        {
-          duration: 3500
-        }
-      )
+    this.playersService.updatePlayer(this.data).subscribe((data) => {
+      this.snackbar.open('Uspešno dodata vrednost: ' + this.data.ime, 'Važi', {
+        duration: 3500
+      })
       this.dialogRef.close()
     }),
       (error: Error) => {
@@ -59,7 +63,7 @@ export class NationalitiesDialogComponent implements OnInit {
       }
   }
   public delete() {
-    this.nationalitiesService.deleteNationality(this.data.id).subscribe(() => {
+    this.playersService.deletePlayer(this.data.id).subscribe(() => {
       this.snackbar.open('Uspešno obrisana vrednost', 'Važi', {
         duration: 3500
       })

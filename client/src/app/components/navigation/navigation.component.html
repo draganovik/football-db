@@ -1,21 +1,6 @@
 <mat-nav-list>
   <h1 mat-subheader>RVA Client</h1>
   <h2 mat-subheader>Evidencija igrača</h2>
-  <a mat-list-item routerLink="/lige">
-    <mat-icon
-      mat-list-icon
-      routerLinkActive
-      #rla_leaderboard="routerLinkActive"
-      class="{{
-        rla_leaderboard.isActive
-          ? 'material-icons-filled'
-          : 'material-icons-outlined inactive'
-      }}"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >leaderboard</mat-icon
-    >
-    <span mat-line>Lige</span>
-  </a>
   <a mat-list-item routerLink="/timovi">
     <mat-icon
       mat-list-icon
@@ -31,6 +16,22 @@
     >
     <span mat-line>Timovi</span>
   </a>
+  <a mat-list-item routerLink="/lige">
+    <mat-icon
+      mat-list-icon
+      routerLinkActive
+      #rla_leaderboard="routerLinkActive"
+      class="{{
+        rla_leaderboard.isActive
+          ? 'material-icons-filled'
+          : 'material-icons-outlined inactive'
+      }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >leaderboard</mat-icon
+    >
+    <span mat-line>Lige</span>
+  </a>
+
   <a mat-list-item routerLink="/nacionalnosti">
     <mat-icon
       mat-list-icon

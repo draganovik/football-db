@@ -1,13 +1,9 @@
 <section class="container">
-  <h1 subheading-2 mat-dialog-title *ngIf="flag == 1">
-    Dodavanje nacionalnosti
-  </h1>
+  <h1 subheading-2 mat-dialog-title *ngIf="flag == 1">Dodavanje lige</h1>
   <h1 subheading-2 mat-dialog-title *ngIf="flag == 2">
-    Ažuriranje nacionalnosti: {{ data.naziv }}
+    Ažuriranje lige: {{ data.naziv }}
   </h1>
-  <h1 v mat-dialog-title *ngIf="flag == 3">
-    Brisanje nacionalnostis: {{ data.naziv }}
-  </h1>
+  <h1 v mat-dialog-title *ngIf="flag == 3">Brisanje lige: {{ data.naziv }}</h1>
 
   <form class="mat-dialog-content" #formControl="ngForm">
     <div class="form">
@@ -26,10 +22,10 @@
       <mat-form-field>
         <input
           matInput
-          placeholder="Skracenica"
-          name="skracenica"
+          placeholder="Oznaka"
+          name="oznaka"
           [disabled]="flag == 3"
-          [(ngModel)]="data.skracenica"
+          [(ngModel)]="data.oznaka"
           required
         />
       </mat-form-field>

@@ -67,7 +67,7 @@ public class LigaController {
 	@ApiOperation(value = "Dodaje novu ligu u bazu podataka.")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
 		boolean isTest = liga.getId() == -100;
-		if (liga.getId() == null || isTest) {
+		if (liga.getId() == null || liga.getId() == 0 || isTest) {
 			liga.setId(null);
 			Liga temp = ligaRepository.save(liga);
 			if (isTest) {

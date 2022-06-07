@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { Subscription } from 'rxjs'
 import { NationalitiesDialogComponent } from 'src/app/components/nationalities-dialog/nationalities-dialog.component'
-import { Nationalities } from 'src/app/models/nationalities'
+import { Nationality } from 'src/app/models/nationality'
 import { NationalitiesService } from 'src/app/services/nationalities.service'
 
 @Component({
@@ -12,7 +12,7 @@ import { NationalitiesService } from 'src/app/services/nationalities.service'
   styleUrls: ['./nationalities.component.css']
 })
 export class NationalitiesComponent implements OnInit, OnDestroy {
-  dataSource!: MatTableDataSource<Nationalities>
+  dataSource!: MatTableDataSource<Nationality>
   displayedColumns = ['id', 'naziv', 'skracenica', 'actions']
   subscription!: Subscription
 

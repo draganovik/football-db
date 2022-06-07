@@ -69,7 +69,7 @@ public class TimController {
 	@ApiOperation(value = "Dodaje novi tim u bazu podataka.")
 	public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
 		boolean isTest = tim.getId() == -100;
-		if (tim.getId() == null || isTest) {
+		if (tim.getId() == null || tim.getId() == 0 || isTest) {
 			tim.setId(null);
 			Tim temp = timRepository.save(tim);
 			if (isTest) {

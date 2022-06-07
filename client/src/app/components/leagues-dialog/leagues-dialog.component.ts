@@ -1,28 +1,32 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { Nationality } from 'src/app/models/nationality'
-import { NationalitiesService } from 'src/app/services/nationalities.service'
+import { League } from 'src/app/models/league'
+import { LeaguesService } from 'src/app/services/leagues.service'
 
 @Component({
-  selector: 'app-nationalities-dialog',
-  templateUrl: './nationalities-dialog.component.html',
-  styleUrls: ['./nationalities-dialog.component.css']
+  selector: 'app-leagues-dialog',
+  templateUrl: './leagues-dialog.component.html',
+  styleUrls: ['./leagues-dialog.component.css']
 })
-export class NationalitiesDialogComponent implements OnInit {
+export class LeaguesDialogComponent implements OnInit {
   flag!: number
 
   constructor(
     public snackbar: MatSnackBar,
-    public dialogRef: MatDialogRef<NationalitiesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Nationality,
-    public nationalitiesService: NationalitiesService
+    public dialogRef: MatDialogRef<LeaguesDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: League,
+    public leaguesService: LeaguesService
   ) {}
 
   ngOnInit(): void {}
 
+  public complare(a: any, b: any) {
+    return a.id == b.id
+  }
+
   public add() {
-    this.nationalitiesService.addNationality(this.data).subscribe((data) => {
+    this.leaguesService.addLeague(this.data).subscribe((data) => {
       console.log(this.data)
       this.snackbar.open(
         'Uspešno dodata vrednost: ' + this.data.naziv,
@@ -41,7 +45,7 @@ export class NationalitiesDialogComponent implements OnInit {
       }
   }
   public update() {
-    this.nationalitiesService.updateNationality(this.data).subscribe((data) => {
+    this.leaguesService.updateLeague(this.data).subscribe((data) => {
       this.snackbar.open(
         'Uspešno dodata vrednost: ' + this.data.naziv,
         'Važi',
@@ -59,7 +63,7 @@ export class NationalitiesDialogComponent implements OnInit {
       }
   }
   public delete() {
-    this.nationalitiesService.deleteNationality(this.data.id).subscribe(() => {
+    this.leaguesService.deleteLeague(this.data.id).subscribe(() => {
       this.snackbar.open('Uspešno obrisana vrednost', 'Važi', {
         duration: 3500
       })

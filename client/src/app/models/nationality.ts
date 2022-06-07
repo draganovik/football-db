@@ -1,4 +1,4 @@
-export class Nationalities {
+export class Nationality {
   id!: number
   naziv!: string
   skracenica!: string

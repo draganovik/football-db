@@ -31,6 +31,13 @@ import { AuthorComponent } from './pages/author/author.component'
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component'
 import { HttpClientModule } from '@angular/common/http'
 import { NationalitiesDialogComponent } from './components/nationalities-dialog/nationalities-dialog.component'
+import { TeamsDialogComponent } from './components/teams-dialog/teams-dialog.component'
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatSelectModule } from '@angular/material/select'
+import { PlayersComponent } from './pages/players/players.component'
+import { PlayersDialogComponent } from './components/players-dialog/players-dialog.component'
+import { LeaguesDialogComponent } from './components/leagues-dialog/leagues-dialog.component'
 
 @NgModule({
   declarations: [
@@ -43,9 +50,13 @@ import { NationalitiesDialogComponent } from './components/nationalities-dialog/
     NationalitiesComponent,
     TeamsComponent,
     LeaguesComponent,
+    LeaguesDialogComponent,
     AuthorComponent,
     PageNotFoundComponent,
-    NationalitiesDialogComponent
+    NationalitiesDialogComponent,
+    TeamsDialogComponent,
+    PlayersComponent,
+    PlayersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +76,11 @@ import { NationalitiesDialogComponent } from './components/nationalities-dialog/
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

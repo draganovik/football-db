@@ -1,9 +1,9 @@
 <main>
-  <!--
   <mat-toolbar color="primary">
-    <span class="title-center">Nacionalnosti</span>
+    <span class="title-center"
+      >{{ this.selectedTeamBottom.naziv }} - Igrači</span
+    >
   </mat-toolbar>
-  -->
 
   <div class="container mat-elavation-z8">
     <mat-table #table [dataSource]="dataSource" class="mat-cell">
@@ -12,27 +12,32 @@
         <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
       </ng-container>
-      <!--Naziv-->
-      <ng-container matColumnDef="naziv">
-        <mat-header-cell *matHeaderCellDef>Naziv</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.naziv }}</mat-cell>
+      <!--Ime-->
+      <ng-container matColumnDef="ime">
+        <mat-header-cell *matHeaderCellDef>Ime</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.ime }}</mat-cell>
       </ng-container>
-      <!-- Osnovan -->
-      <ng-container matColumnDef="osnovan">
-        <mat-header-cell *matHeaderCellDef>Osnovan</mat-header-cell>
+      <!--Prezime-->
+      <ng-container matColumnDef="prezime">
+        <mat-header-cell *matHeaderCellDef>Prezime</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.prezime }}</mat-cell>
+      </ng-container>
+      <!-- Reg. broj -->
+      <ng-container matColumnDef="brojReg">
+        <mat-header-cell *matHeaderCellDef>Reg. broj</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.brojReg }}</mat-cell>
+      </ng-container>
+      <!-- Datum rodjenja -->
+      <ng-container matColumnDef="datumRodjenja">
+        <mat-header-cell *matHeaderCellDef>Datum rođenja</mat-header-cell>
         <mat-cell *matCellDef="let row">{{
-          row.osnovan | date: 'dd.MM.yyyy.'
+          row.datumRodjenja | date: 'dd.MM.yyyy.'
         }}</mat-cell>
       </ng-container>
-      <!-- Sediste -->
-      <ng-container matColumnDef="sediste">
-        <mat-header-cell *matHeaderCellDef>Sediste</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.sediste }}</mat-cell>
-      </ng-container>
-      <!-- Liga -->
-      <ng-container matColumnDef="liga">
-        <mat-header-cell *matHeaderCellDef>Liga</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.liga.naziv }}</mat-cell>
+      <!-- Nacionalnost -->
+      <ng-container matColumnDef="nacionalnost">
+        <mat-header-cell *matHeaderCellDef>nacionalnost</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.nacionalnost.naziv }}</mat-cell>
       </ng-container>
       <!-- Action Buttons -->
       <ng-container matColumnDef="actions">
@@ -49,10 +54,11 @@
                 openDialog(
                   2,
                   row.id,
-                  row.naziv,
-                  row.osnovan,
-                  row.sediste,
-                  row.liga
+                  row.ime,
+                  row.prezime,
+                  row.brojReg,
+                  row.datumRodjenja,
+                  row.nacionalnost
                 )
               "
               >edit</mat-icon
@@ -65,10 +71,11 @@
                 openDialog(
                   3,
                   row.id,
-                  row.naziv,
-                  row.osnovan,
-                  row.sediste,
-                  row.liga
+                  row.ime,
+                  row.prezime,
+                  row.brojReg,
+                  row.datumRodjenja,
+                  row.nacionalnost
                 )
               "
               >delete</mat-icon
@@ -80,12 +87,8 @@
       <mat-row
         style="cursor: pointer"
         *matRowDef="let row; columns: displayedColumns"
-        (click)="selectRow(row)"
       >
       </mat-row>
     </mat-table>
-  </div>
-  <div class="container mat-elavation-z8" *ngIf="selectedTeamTop">
-    <app-players [selectedTeamBottom]="selectedTeamTop"> </app-players>
   </div>
 </main>

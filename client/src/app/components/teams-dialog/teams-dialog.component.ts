@@ -1,28 +1,40 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { Nationality } from 'src/app/models/nationality'
-import { NationalitiesService } from 'src/app/services/nationalities.service'
+import { League } from 'src/app/models/league'
+import { Team } from 'src/app/models/team'
+import { LeaguesService } from 'src/app/services/leagues.service'
+import { TeamsService } from 'src/app/services/teams.service'
 
 @Component({
-  selector: 'app-nationalities-dialog',
-  templateUrl: './nationalities-dialog.component.html',
-  styleUrls: ['./nationalities-dialog.component.css']
+  selector: 'app-teams-dialog',
+  templateUrl: './teams-dialog.component.html',
+  styleUrls: ['./teams-dialog.component.css']
 })
-export class NationalitiesDialogComponent implements OnInit {
+export class TeamsDialogComponent implements OnInit {
   flag!: number
+  leagues!: League[]
 
   constructor(
     public snackbar: MatSnackBar,
-    public dialogRef: MatDialogRef<NationalitiesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Nationality,
-    public nationalitiesService: NationalitiesService
+    public dialogRef: MatDialogRef<TeamsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Team,
+    public teamsService: TeamsService,
+    public leaguesService: LeaguesService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.leaguesService.getAllLeagues().subscribe((data) => {
+      this.leagues = data
+    })
+  }
+
+  public complare(a: any, b: any) {
+    return a.id == b.id
+  }
 
   public add() {
-    this.nationalitiesService.addNationality(this.data).subscribe((data) => {
+    this.teamsService.addTeam(this.data).subscribe((data) => {
       console.log(this.data)
       this.snackbar.open(
         'Uspešno dodata vrednost: ' + this.data.naziv,
@@ -41,7 +53,7 @@ export class NationalitiesDialogComponent implements OnInit {
       }
   }
   public update() {
-    this.nationalitiesService.updateNationality(this.data).subscribe((data) => {
+    this.teamsService.updateTeam(this.data).subscribe((data) => {
       this.snackbar.open(
         'Uspešno dodata vrednost: ' + this.data.naziv,
         'Važi',
@@ -59,7 +71,7 @@ export class NationalitiesDialogComponent implements OnInit {
       }
   }
   public delete() {
-    this.nationalitiesService.deleteNationality(this.data.id).subscribe(() => {
+    this.teamsService.deleteTeam(this.data.id).subscribe(() => {
       this.snackbar.open('Uspešno obrisana vrednost', 'Važi', {
         duration: 3500
       })
