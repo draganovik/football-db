@@ -22,3 +22,12 @@ main {
   padding: 5rem 1rem;
   min-height: 100vh;
 }
+
+.search-field {
+  width: 30rem;
+  margin-left: auto;
+}
+
+.search-field div {
+  border: 0 !important;
+}

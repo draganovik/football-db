@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { MatPaginator } from '@angular/material/paginator'
+import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Subscription } from 'rxjs'
 import { LeaguesDialogComponent } from 'src/app/components/leagues-dialog/leagues-dialog.component'
@@ -15,6 +17,9 @@ export class LeaguesComponent implements OnInit {
   dataSource!: MatTableDataSource<League>
   displayedColumns = ['id', 'naziv', 'oznaka', 'actions']
   subscription!: Subscription
+
+  @ViewChild(MatSort, { static: false }) sort!: MatSort
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
 
   constructor(
     private leaguesService: LeaguesService,
@@ -34,6 +39,8 @@ export class LeaguesComponent implements OnInit {
       .getAllLeagues()
       .subscribe((data) => {
         this.dataSource = new MatTableDataSource(data)
+        this.dataSource.sort = this.sort
+        this.dataSource.paginator = this.paginator
       })),
       (error: Error) => {
         console.log(error.name + ' ' + error.message)
@@ -57,5 +64,12 @@ export class LeaguesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.loadData()
     })
+  }
+
+  public applyFilter(filter: any) {
+    filter = filter.target.value
+    filter = filter.trim()
+    filter = filter.toLocaleLowerCase()
+    this.dataSource.filter = filter
   }
 }

@@ -38,6 +38,8 @@ import { MatSelectModule } from '@angular/material/select'
 import { PlayersComponent } from './pages/players/players.component'
 import { PlayersDialogComponent } from './components/players-dialog/players-dialog.component'
 import { LeaguesDialogComponent } from './components/leagues-dialog/leagues-dialog.component'
+import { MatSortModule } from '@angular/material/sort'
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 @NgModule({
   declarations: [
@@ -80,7 +82,9 @@ import { LeaguesDialogComponent } from './components/leagues-dialog/leagues-dial
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
