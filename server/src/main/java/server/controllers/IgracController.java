@@ -90,7 +90,8 @@ public class IgracController {
 	@ApiOperation(value = "Dodaje novg igraca u bazu podataka.")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
 		boolean isTest = igrac.getId() == -100;
-		if (((igrac.getId() == null || igrac.getId() == 0) && !igracRepository.existsByBrojReg(igrac.getBrojReg())) || isTest) {
+		if (((igrac.getId() == null || igrac.getId() == 0) && !igracRepository.existsByBrojReg(igrac.getBrojReg()))
+				|| isTest) {
 			igrac.setId(null);
 			Igrac temp = igracRepository.save(igrac);
 			if (isTest) {
