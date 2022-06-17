@@ -2,6 +2,14 @@
 
 ## Razvoj višeslojnih aplikacija 2021 / 2022 [6. semestar]
 
+#### Bedževi
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cef86994-4fce-4da2-8713-f9f727311f0e/deploy-status)](https://app.netlify.com/sites/rva-it68g2019/deploys)
+![Heroku](https://heroku-badge.herokuapp.com/?app=rva-it68g2019)
+
+#### Demo projekta
+- Spring Boot Server: [Heroku deployment URI](https://rva-it68g2019.herokuapp.com)
+- Angular Client: [Netlify deployment URI](https://rva-it68g2019.netlify.app)
+
 #### Lični podaci
 - Ime i prezime: **Mladen Draganović**
 - Broj indeksa: **IT68/2019**
