@@ -1,3 +1,23 @@
 <main>
-  <p>home works!</p>
+  <h2>Dobrodišli u Fudbalski Informacioni Sistem</h2>
+  <br />
+  <mat-grid-list cols="4" [gutterSize]="'1rem'" [rowHeight]="'24vh'">
+    <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+    >
+      <mat-card class="info-card">
+        <mat-icon class="material-icons-outlined">{{ tile.icon }}</mat-icon>
+        <mat-card-content>
+          <mat-card-title>{{ tile.title }}</mat-card-title>
+          <mat-card-subtitle>{{ tile.subtitle }}</mat-card-subtitle>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <a mat-button routerLink="/{{ tile.uri }}">Otvori prikaz</a>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </main>

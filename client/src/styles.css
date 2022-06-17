@@ -19,12 +19,15 @@ mat-sidenav {
 }
 
 main {
-  padding: 5rem 1rem;
+  padding: 5rem 0.5rem;
   min-height: 100vh;
+  max-width: 120ch;
+  margin: auto;
 }
 
 .search-field {
-  width: 30rem;
+  width: 100%;
+  max-width: 30rem;
   margin-left: auto;
 }
 

@@ -1,0 +1,7 @@
+p em a {
+  display: inline;
+}
+a {
+  display: block;
+  margin: 1rem 0;
+}

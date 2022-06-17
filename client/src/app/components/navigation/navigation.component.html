@@ -73,17 +73,4 @@
     >
     <span mat-line>Informacije</span>
   </a>
-  <a mat-list-item routerLink="/autor">
-    <mat-icon
-      mat-list-icon
-      routerLinkActive
-      #rla_face="routerLinkActive"
-      class="{{
-        rla_face.isActive ? 'material-icons-filled' : 'material-icons-outlined'
-      }}"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >face</mat-icon
-    >
-    <span mat-line>O Autoru</span>
-  </a>
 </mat-nav-list>

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { NavigationComponent } from './components/navigation/navigation.component'
 import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
 
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
@@ -19,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
+import { MatCardModule } from '@angular/material/card'
 import { FormsModule } from '@angular/forms'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -27,7 +27,6 @@ import { HomeComponent } from './pages/home/home.component'
 import { NationalitiesComponent } from './pages/nationalities/nationalities.component'
 import { TeamsComponent } from './pages/teams/teams.component'
 import { LeaguesComponent } from './pages/leagues/leagues.component'
-import { AuthorComponent } from './pages/author/author.component'
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component'
 import { HttpClientModule } from '@angular/common/http'
 import { NationalitiesDialogComponent } from './components/nationalities-dialog/nationalities-dialog.component'
@@ -46,14 +45,12 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     AppComponent,
     HeaderComponent,
     NavigationComponent,
-    FooterComponent,
     AboutComponent,
     HomeComponent,
     NationalitiesComponent,
     TeamsComponent,
     LeaguesComponent,
     LeaguesDialogComponent,
-    AuthorComponent,
     PageNotFoundComponent,
     NationalitiesDialogComponent,
     TeamsDialogComponent,
@@ -84,7 +81,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatSelectModule,
     MatOptionModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

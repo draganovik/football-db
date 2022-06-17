@@ -4,9 +4,11 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild
 } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { Subscription } from 'rxjs'
 import { PlayersDialogComponent } from 'src/app/components/players-dialog/players-dialog.component'
@@ -33,6 +35,7 @@ export class PlayersComponent implements OnInit, OnDestroy, OnChanges {
   ]
   subscription!: Subscription
   @Input() selectedTeamBottom!: Team
+  @ViewChild(MatSort, { static: false }) sort!: MatSort
 
   constructor(
     private playersService: PlayersService,
@@ -56,6 +59,7 @@ export class PlayersComponent implements OnInit, OnDestroy, OnChanges {
       .getPlayersByTeam(teamID)
       .subscribe((data) => {
         this.dataSource = new MatTableDataSource(data)
+        this.dataSource.sort = this.sort
       })),
       (error: Error) => {
         console.log(error.name + ' ' + error.message)
