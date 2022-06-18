@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
@@ -24,7 +24,8 @@ export class LeaguesComponent implements OnInit {
 
   constructor(
     private leaguesService: LeaguesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnDestroy(): void {
@@ -40,12 +41,14 @@ export class LeaguesComponent implements OnInit {
       .getAllLeagues()
       .subscribe((data?) => {
         this.dataSource = new MatTableDataSource(data)
+        this.dataLoading = false
+        this.changeDetectorRef.detectChanges()
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator
-        this.dataLoading = false
       })),
       (error: Error) => {
         console.log(error.name + ' ' + error.message)
+        this.dataLoading = false
       }
   }
 

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -40,7 +41,8 @@ export class PlayersComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private playersService: PlayersService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,11 +62,13 @@ export class PlayersComponent implements OnInit, OnDestroy, OnChanges {
       .getPlayersByTeam(teamID)
       .subscribe((data) => {
         this.dataSource = new MatTableDataSource(data)
-        this.dataSource.sort = this.sort
         this.dataLoading = false
+        this.changeDetectorRef.detectChanges()
+        this.dataSource.sort = this.sort
       })),
       (error: Error) => {
         console.log(error.name + ' ' + error.message)
+        this.dataLoading = false
       }
   }
 

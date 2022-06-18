@@ -6,7 +6,11 @@
       [colspan]="tile.cols"
       [rowspan]="tile.rows"
     >
-      <mat-card class="info-card">
+      <mat-card class="mock card" *ngIf="tile.title == null">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
+      <mat-card class="info card" *ngIf="tile.title != null">
         <mat-icon class="material-icons-outlined">{{ tile.icon }}</mat-icon>
         <mat-card-content>
           <mat-card-title>{{ tile.title }}</mat-card-title>

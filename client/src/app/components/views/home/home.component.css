@@ -1,11 +1,16 @@
-.info-card {
+.card {
   height: 100%;
   width: 100%;
   display: grid;
+  gap: 1rem;
+}
+.info {
   grid-template-columns: min-content 1fr;
   grid-template-rows: min-content 1fr;
-  gap: 1rem;
   align-items: bottom;
+}
+.mock {
+  align-items: center;
 }
 mat-card-actions {
   grid-column: 1 / span 2;
@@ -22,6 +27,6 @@ mat-card-title {
 }
 mat-icon {
   font-size: 4rem;
-  width: 4rem;
-  height: 4rem;
+  width: auto;
+  height: auto;
 }

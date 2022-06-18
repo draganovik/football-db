@@ -6,23 +6,7 @@
   </mat-toolbar>
 
   <div class="container mat-elavation-z8">
-    <div *ngIf="dataLoading" class="mat-progress-spinner">
-      <mat-progress-spinner color="primary" mode="indeterminate">
-      </mat-progress-spinner>
-    </div>
-
-    <app-error
-      *ngIf="!dataLoading && dataSource.data.length == 0"
-      title="Nema podataka"
-      message="Izabrani tim nema igrača..."
-    ></app-error>
-    <mat-table
-      #table
-      [dataSource]="dataSource"
-      class="mat-cell"
-      matSort
-      *ngIf="!dataLoading && dataSource.data.length != 0"
-    >
+    <mat-table #table [dataSource]="dataSource" class="mat-cell" matSort>
       <!--ID-->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
@@ -110,5 +94,14 @@
       >
       </mat-row>
     </mat-table>
+    <app-error
+      *ngIf="!dataLoading && dataSource.data.length == 0"
+      title="Nema podataka"
+      message="Izabrani tim nema igrača..."
+    ></app-error>
+    <div *ngIf="dataLoading" class="mat-progress-spinner">
+      <mat-progress-spinner color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
   </div>
 </section>

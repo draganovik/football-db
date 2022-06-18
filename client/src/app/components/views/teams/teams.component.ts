@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
@@ -25,7 +31,11 @@ export class TeamsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: false }) sort!: MatSort
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
 
-  constructor(private teamsService: TeamsService, private dialog: MatDialog) {}
+  constructor(
+    private teamsService: TeamsService,
+    private dialog: MatDialog,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
@@ -38,12 +48,14 @@ export class TeamsComponent implements OnInit, OnDestroy {
   public loadData() {
     ;(this.subscription = this.teamsService.getAllTeams().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data)
+      this.dataLoading = false
+      this.changeDetectorRef.detectChanges()
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.paginator
-      this.dataLoading = false
     })),
       (error: Error) => {
         console.log(error.name + ' ' + error.message)
+        this.dataLoading = false
       }
   }
 
