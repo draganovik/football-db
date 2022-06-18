@@ -7,8 +7,8 @@
 ![Heroku](https://heroku-badge.herokuapp.com/?app=rva-it68g2019)
 
 #### Demo projekta
-- Spring Boot Server: [Heroku deployment URI](https://rva-it68g2019.herokuapp.com)
-- Angular Client: [Netlify deployment URI](https://rva-it68g2019.netlify.app)
+- Angular Web Client: [https://rva-it68g2019.netlify.app](https://rva-it68g2019.netlify.app)
+- Spring Boot Server: [https://rva-it68g2019.herokuapp.com](https://rva-it68g2019.herokuapp.com)
 
 #### Lični podaci
 - Ime i prezime: **Mladen Draganović**
