@@ -23,7 +23,7 @@ export class AppComponent {
             route = route.firstChild
           }
           if (route.snapshot.data['title']) {
-            routeTitle = route!.snapshot.data['title']
+            routeTitle = route!.snapshot.data['title'] + ' | RVA Fudbal Veb'
           }
           return routeTitle
         })

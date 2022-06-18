@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-form-field {
+  font-size: 1rem;
+  flex-grow: 1;
+  margin-top: 0.4rem;
+}
+
+.no-result {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+mat-table .mat-row * {
+  cursor: pointer;
+}
+
+.mat-row:hover {
+  filter: brightness(0.86);
+}
+
+.mat-cell {
+  justify-content: space-between;
+}
+
+.mat-cell:nth-child(1),
+.mat-header-cell:nth-child(1) {
+  flex: 0 0 4rem;
+}
+
+.mat-cell:nth-child(6),
+.mat-header-cell:nth-child(6) {
+  flex: 0 0 6rem;
+}
+
+.title-center {
+  margin: 0 auto;
+}

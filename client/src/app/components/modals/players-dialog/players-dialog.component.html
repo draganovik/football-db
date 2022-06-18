@@ -1,0 +1,136 @@
+<section class="container">
+  <h1 subheading-2 mat-dialog-title *ngIf="flag == 1">Dodavanje igrača</h1>
+  <h1 subheading-2 mat-dialog-title *ngIf="flag == 2">
+    Ažuriranje igrača: {{ data.ime + ' ' + data.prezime }}
+  </h1>
+  <h1 v mat-dialog-title *ngIf="flag == 3">
+    Brisanje igrača: {{ data.ime + ' ' + data.prezime }}
+  </h1>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Ime"
+          name="ime"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.ime"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Prezime"
+          name="prezime"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.prezime"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Reg. broj"
+          name="brojReg"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.brojReg"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="pickerDate"
+          placeholder="Datum rođenja"
+          name="datumRodjenja"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.datumRodjenja"
+          required
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field *ngIf="flag == 1">
+        <mat-select
+          matInput
+          placeholder="Nacionalnost"
+          name="nacionalnost"
+          [compareWith]="complare"
+          [(ngModel)]="data.nacionalnost"
+          required
+        >
+          <mat-option
+            *ngFor="let nacionality of this.nationalities"
+            [value]="nacionality"
+          >
+            {{ nacionality.naziv }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="flag == 2 || flag == 3">
+        <mat-select
+          matInput
+          placeholder="Nacionalnost"
+          name="nacionalnost"
+          [compareWith]="complare"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.nacionalnost"
+          required
+        >
+          <mat-option
+            *ngFor="let nacionality of this.nationalities"
+            [value]="nacionality"
+          >
+            {{ nacionality.naziv }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+    <button
+      mat-stroked-button
+      *ngIf="flag == 1"
+      type="submit"
+      mat-dialog-close="1"
+      [disabled]="!formControl.valid"
+      (click)="add()"
+    >
+      Sačuvaj
+    </button>
+    <button
+      mat-stroked-button
+      *ngIf="flag == 2"
+      type="submit"
+      mat-dialog-close="1"
+      [disabled]="!formControl.valid"
+      (click)="update()"
+    >
+      Modifikuj
+    </button>
+    <button
+      mat-stroked-button
+      *ngIf="flag == 3"
+      type="submit"
+      mat-dialog-close="1"
+      (click)="delete()"
+      color="warn"
+    >
+      Obriši
+    </button>
+    <button mat-button (click)="cancel()">Poništi</button>
+  </div>
+</section>

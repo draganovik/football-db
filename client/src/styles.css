@@ -1,10 +1,12 @@
+@import 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400&display=swap';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined';
+@import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0';
 @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 
 * {
   color-scheme: light dark;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 html,
@@ -21,8 +23,12 @@ mat-sidenav {
 main {
   padding: 5rem 0.5rem;
   min-height: 100vh;
-  max-width: 120ch;
+  max-width: 110ch;
   margin: auto;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .search-field {
@@ -33,4 +39,19 @@ main {
 
 .search-field div {
   border: 0 !important;
+}
+
+.mat-cell {
+  cursor: default;
+}
+
+.mat-row:hover {
+  filter: brightness(0.94);
+}
+
+.mat-progress-spinner {
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

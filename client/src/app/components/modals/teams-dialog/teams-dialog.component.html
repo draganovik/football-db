@@ -1,0 +1,116 @@
+<section class="container">
+  <h1 subheading-2 mat-dialog-title *ngIf="flag == 1">Dodavanje lige</h1>
+  <h1 subheading-2 mat-dialog-title *ngIf="flag == 2">
+    Ažuriranje lige: {{ data.naziv }}
+  </h1>
+  <h1 v mat-dialog-title *ngIf="flag == 3">Brisanje lige: {{ data.naziv }}</h1>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Naziv"
+          name="naziv"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.naziv"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="pickerDate"
+          placeholder="Osnovan"
+          name="osnovan"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.osnovan"
+          required
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Sediste"
+          name="sediste"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.sediste"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field *ngIf="flag == 1">
+        <mat-select
+          matInput
+          placeholder="Liga"
+          name="liga"
+          [compareWith]="complare"
+          [(ngModel)]="data.liga"
+          required
+        >
+          <mat-option *ngFor="let league of this.leagues" [value]="league">
+            {{ league.naziv }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="flag == 2 || flag == 3">
+        <mat-select
+          matInput
+          placeholder="Liga"
+          name="liga"
+          [compareWith]="complare"
+          [disabled]="flag == 3"
+          [(ngModel)]="data.liga"
+          required
+        >
+          <mat-option *ngFor="let league of this.leagues" [value]="league">
+            {{ league.naziv }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+    <button
+      mat-stroked-button
+      *ngIf="flag == 1"
+      type="submit"
+      mat-dialog-close="1"
+      [disabled]="!formControl.valid"
+      (click)="add()"
+    >
+      Sačuvaj
+    </button>
+    <button
+      mat-stroked-button
+      *ngIf="flag == 2"
+      type="submit"
+      mat-dialog-close="1"
+      [disabled]="!formControl.valid"
+      (click)="update()"
+    >
+      Modifikuj
+    </button>
+    <button
+      mat-stroked-button
+      *ngIf="flag == 3"
+      type="submit"
+      mat-dialog-close="1"
+      (click)="delete()"
+      color="warn"
+    >
+      Obriši
+    </button>
+    <button mat-button (click)="cancel()">Poništi</button>
+  </div>
+</section>

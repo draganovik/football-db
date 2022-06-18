@@ -1,0 +1,10 @@
+<div class="error-container">
+  <mat-icon mat-list-icon class="material-symbols-outlined">{{
+    icon
+  }}</mat-icon>
+  <h1>{{ title }}</h1>
+  <p>{{ message }}</p>
+  <a *ngIf="redirect" mat-stroked-button color="accent" routerLink="/"
+    >Vratite se na početnu stranicu</a
+  >
+</div>

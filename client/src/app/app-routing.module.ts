@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { AboutComponent } from './pages/about/about.component'
-import { HomeComponent } from './pages/home/home.component'
-import { LeaguesComponent } from './pages/leagues/leagues.component'
-import { NationalitiesComponent } from './pages/nationalities/nationalities.component'
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component'
-import { TeamsComponent } from './pages/teams/teams.component'
+import { AboutComponent } from './components/views/about/about.component'
+import { HomeComponent } from './components/views/home/home.component'
+import { LeaguesComponent } from './components/views/leagues/leagues.component'
+import { NationalitiesComponent } from './components/views/nationalities/nationalities.component'
+import { PageNotFoundComponent } from './components/views/page-not-found/page-not-found.component'
+import { TeamsComponent } from './components/views/teams/teams.component'
 
 const routes: Routes = [
   {
