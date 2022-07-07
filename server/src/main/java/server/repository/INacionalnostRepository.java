@@ -11,9 +11,9 @@ import server.models.Nacionalnost;
 @Repository
 public interface INacionalnostRepository extends JpaRepository<Nacionalnost, Integer> {
 
-	@Query(value = "SELECT * FROM nacionalnost where id > 0", nativeQuery = true)
-	Collection<Nacionalnost> findAllValid();
+    @Query(value = "SELECT * FROM nacionalnost where id > 0", nativeQuery = true)
+    Collection<Nacionalnost> findAllValid();
 
-	Collection<Nacionalnost> findByNazivContainingIgnoreCase(String naziv);
+    Collection<Nacionalnost> findByNazivContainingIgnoreCase(String naziv);
 
 }

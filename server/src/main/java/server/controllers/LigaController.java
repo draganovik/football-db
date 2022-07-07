@@ -23,68 +23,68 @@ import server.repository.ILigaRepository;
 
 @CrossOrigin
 @RestController
-@Api(tags = { "CRUD Operacije: LIGA" })
+@Api(tags = {"CRUD Operacije: LIGA"})
 public class LigaController {
 
-	@Autowired
-	private ILigaRepository ligaRepository;
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private ILigaRepository ligaRepository;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@DeleteMapping("/liga/{id}")
-	@ApiOperation(value = "Briše ligu u odnosu na vrednost posleđene path varijable id.")
-	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {
-		if (ligaRepository.existsById(id)) {
-			ligaRepository.deleteById(id);
-			if (id == -100) {
-				jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Liga', 'SRB')");
-			}
+    @DeleteMapping("/liga/{id}")
+    @ApiOperation(value = "Briše ligu u odnosu na vrednost posleđene path varijable id.")
+    public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {
+        if (ligaRepository.existsById(id)) {
+            ligaRepository.deleteById(id);
+            if (id == -100) {
+                jdbcTemplate.execute("INSERT INTO liga VALUES(-100, 'Super Liga', 'SRB')");
+            }
 
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
-	@GetMapping("/liga")
-	@ApiOperation(value = "Vraća kolekciju svih liga iz baze podataka.")
-	public Collection<Liga> getAllLiga() {
-		return ligaRepository.findAllValid();
-	}
+    @GetMapping("/liga")
+    @ApiOperation(value = "Vraća kolekciju svih liga iz baze podataka.")
+    public Collection<Liga> getAllLiga() {
+        return ligaRepository.findAllValid();
+    }
 
-	@GetMapping("/liga/{id}")
-	@ApiOperation(value = "Vraća ligu u odnosu na posleđenu vrednost path varijable id.")
-	public Optional<Liga> getLigaById(@PathVariable Integer id) {
-		return ligaRepository.findById(id);
-	}
+    @GetMapping("/liga/{id}")
+    @ApiOperation(value = "Vraća ligu u odnosu na posleđenu vrednost path varijable id.")
+    public Optional<Liga> getLigaById(@PathVariable Integer id) {
+        return ligaRepository.findById(id);
+    }
 
-	@GetMapping("/liga/naziv/{naziv}")
-	@ApiOperation(value = "Vraća ligu u odnosu na posleđenu vrednost path varijable naziv.")
-	public Collection<Liga> getLigaiByNaziv(@PathVariable("naziv") String naziv) {
-		return ligaRepository.findByNazivContainingIgnoreCase(naziv);
-	}
+    @GetMapping("/liga/naziv/{naziv}")
+    @ApiOperation(value = "Vraća ligu u odnosu na posleđenu vrednost path varijable naziv.")
+    public Collection<Liga> getLigaiByNaziv(@PathVariable("naziv") String naziv) {
+        return ligaRepository.findByNazivContainingIgnoreCase(naziv);
+    }
 
-	@PostMapping("/liga")
-	@ApiOperation(value = "Dodaje novu ligu u bazu podataka.")
-	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
-		boolean isTest = liga.getId() == -100;
-		if (liga.getId() == null || liga.getId() == 0 || isTest) {
-			liga.setId(null);
-			Liga temp = ligaRepository.save(liga);
-			if (isTest) {
-				jdbcTemplate.execute("DELETE FROM liga WHERE id=" + temp.getId());
-			}
-			return new ResponseEntity<>(temp, HttpStatus.CREATED);
-		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
-	}
+    @PostMapping("/liga")
+    @ApiOperation(value = "Dodaje novu ligu u bazu podataka.")
+    public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
+        boolean isTest = liga.getId() == -100;
+        if (liga.getId() == null || liga.getId() == 0 || isTest) {
+            liga.setId(null);
+            Liga temp = ligaRepository.save(liga);
+            if (isTest) {
+                jdbcTemplate.execute("DELETE FROM liga WHERE id=" + temp.getId());
+            }
+            return new ResponseEntity<>(temp, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
 
-	@PutMapping("/liga")
-	@ApiOperation(value = "Ažurira postojeću ligu.")
-	public ResponseEntity<Liga> updateLiga(@RequestBody Liga liga) {
-		if (ligaRepository.existsById(liga.getId())) {
-			ligaRepository.save(liga);
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+    @PutMapping("/liga")
+    @ApiOperation(value = "Ažurira postojeću ligu.")
+    public ResponseEntity<Liga> updateLiga(@RequestBody Liga liga) {
+        if (ligaRepository.existsById(liga.getId())) {
+            ligaRepository.save(liga);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

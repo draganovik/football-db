@@ -11,9 +11,9 @@ import server.models.Liga;
 @Repository
 public interface ILigaRepository extends JpaRepository<Liga, Integer> {
 
-	@Query(value = "SELECT * FROM liga where id > 0", nativeQuery = true)
-	Collection<Liga> findAllValid();
+    @Query(value = "SELECT * FROM liga where id > 0", nativeQuery = true)
+    Collection<Liga> findAllValid();
 
-	Collection<Liga> findByNazivContainingIgnoreCase(String naziv);
+    Collection<Liga> findByNazivContainingIgnoreCase(String naziv);
 
 }

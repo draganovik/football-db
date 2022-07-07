@@ -17,75 +17,74 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the nacionalnost database table.
- *
  */
 @Entity
 @NamedQuery(name = "Nacionalnost.findAll", query = "SELECT n FROM Nacionalnost n")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Nacionalnost implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "NACIONALNOST_ID_GENERATOR", sequenceName = "NACIONALNOST_ID_REQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NACIONALNOST_ID_GENERATOR")
-	private Integer id;
+    @Id
+    @SequenceGenerator(name = "NACIONALNOST_ID_GENERATOR", sequenceName = "NACIONALNOST_ID_REQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NACIONALNOST_ID_GENERATOR")
+    private Integer id;
 
-	private String naziv;
+    private String naziv;
 
-	private String skracenica;
+    private String skracenica;
 
-	// bi-directional many-to-one association to Igrac
-	@OneToMany(mappedBy = "nacionalnost", cascade = { CascadeType.DETACH, CascadeType.REMOVE })
-	@JsonIgnore
-	private List<Igrac> igracs;
+    // bi-directional many-to-one association to Igrac
+    @OneToMany(mappedBy = "nacionalnost", cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JsonIgnore
+    private List<Igrac> igracs;
 
-	public Nacionalnost() {
-	}
+    public Nacionalnost() {
+    }
 
-	public Igrac addIgrac(Igrac igrac) {
-		getIgracs().add(igrac);
-		igrac.setNacionalnost(this);
+    public Igrac addIgrac(Igrac igrac) {
+        getIgracs().add(igrac);
+        igrac.setNacionalnost(this);
 
-		return igrac;
-	}
+        return igrac;
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public List<Igrac> getIgracs() {
-		return this.igracs;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getNaziv() {
-		return this.naziv;
-	}
+    public List<Igrac> getIgracs() {
+        return this.igracs;
+    }
 
-	public String getSkracenica() {
-		return this.skracenica;
-	}
+    public void setIgracs(List<Igrac> igracs) {
+        this.igracs = igracs;
+    }
 
-	public Igrac removeIgrac(Igrac igrac) {
-		getIgracs().remove(igrac);
-		igrac.setNacionalnost(null);
+    public String getNaziv() {
+        return this.naziv;
+    }
 
-		return igrac;
-	}
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public String getSkracenica() {
+        return this.skracenica;
+    }
 
-	public void setIgracs(List<Igrac> igracs) {
-		this.igracs = igracs;
-	}
+    public void setSkracenica(String skracenica) {
+        this.skracenica = skracenica;
+    }
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
+    public Igrac removeIgrac(Igrac igrac) {
+        getIgracs().remove(igrac);
+        igrac.setNacionalnost(null);
 
-	public void setSkracenica(String skracenica) {
-		this.skracenica = skracenica;
-	}
+        return igrac;
+    }
 
 }

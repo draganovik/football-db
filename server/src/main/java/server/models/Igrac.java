@@ -20,98 +20,97 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the igrac database table.
- *
  */
 @Entity
 @NamedQuery(name = "Igrac.findAll", query = "SELECT i FROM Igrac i")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Igrac implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "IGRAC_ID_GENERATOR", sequenceName = "IGRAC_ID_REQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IGRAC_ID_GENERATOR")
-	@AttributeOverride(name = "id", column = @Column(name = "ID"))
-	private Integer id;
+    @Id
+    @SequenceGenerator(name = "IGRAC_ID_GENERATOR", sequenceName = "IGRAC_ID_REQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IGRAC_ID_GENERATOR")
+    @AttributeOverride(name = "id", column = @Column(name = "ID"))
+    private Integer id;
 
-	@Column(name = "broj_reg")
-	private String brojReg;
+    @Column(name = "broj_reg")
+    private String brojReg;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "datum_rodjenja")
-	private Date datumRodjenja;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "datum_rodjenja")
+    private Date datumRodjenja;
 
-	private String ime;
+    private String ime;
 
-	private String prezime;
+    private String prezime;
 
-	// bi-directional many-to-one association to Nacionalnost
-	@ManyToOne
-	@JoinColumn(name = "nacionalnost")
-	private Nacionalnost nacionalnost;
+    // bi-directional many-to-one association to Nacionalnost
+    @ManyToOne
+    @JoinColumn(name = "nacionalnost")
+    private Nacionalnost nacionalnost;
 
-	// bi-directional many-to-one association to Tim
-	@ManyToOne
-	@JoinColumn(name = "tim")
-	private Tim tim;
+    // bi-directional many-to-one association to Tim
+    @ManyToOne
+    @JoinColumn(name = "tim")
+    private Tim tim;
 
-	public Igrac() {
-	}
+    public Igrac() {
+    }
 
-	public String getBrojReg() {
-		return this.brojReg;
-	}
+    public String getBrojReg() {
+        return this.brojReg;
+    }
 
-	public Date getDatumRodjenja() {
-		return this.datumRodjenja;
-	}
+    public void setBrojReg(String brojReg) {
+        this.brojReg = brojReg;
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Date getDatumRodjenja() {
+        return this.datumRodjenja;
+    }
 
-	public String getIme() {
-		return this.ime;
-	}
+    public void setDatumRodjenja(Date datumRodjenja) {
+        this.datumRodjenja = datumRodjenja;
+    }
 
-	public Nacionalnost getNacionalnost() {
-		return this.nacionalnost;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public String getPrezime() {
-		return this.prezime;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Tim getTim() {
-		return this.tim;
-	}
+    public String getIme() {
+        return this.ime;
+    }
 
-	public void setBrojReg(String brojReg) {
-		this.brojReg = brojReg;
-	}
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
 
-	public void setDatumRodjenja(Date datumRodjenja) {
-		this.datumRodjenja = datumRodjenja;
-	}
+    public Nacionalnost getNacionalnost() {
+        return this.nacionalnost;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setNacionalnost(Nacionalnost nacionalnost) {
+        this.nacionalnost = nacionalnost;
+    }
 
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
+    public String getPrezime() {
+        return this.prezime;
+    }
 
-	public void setNacionalnost(Nacionalnost nacionalnost) {
-		this.nacionalnost = nacionalnost;
-	}
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
 
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
+    public Tim getTim() {
+        return this.tim;
+    }
 
-	public void setTim(Tim tim) {
-		this.tim = tim;
-	}
+    public void setTim(Tim tim) {
+        this.tim = tim;
+    }
 
 }

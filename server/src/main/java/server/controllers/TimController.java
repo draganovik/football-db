@@ -23,70 +23,70 @@ import server.repository.ITimRepository;
 
 @CrossOrigin
 @RestController
-@Api(tags = { "CRUD Operacije: TIM" })
+@Api(tags = {"CRUD Operacije: TIM"})
 public class TimController {
 
-	@Autowired
-	private ITimRepository timRepository;
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private ITimRepository timRepository;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@DeleteMapping("/tim/{id}")
-	@ApiOperation(value = "Briše tim u odnosu na vrednost posleđene path varijable id.")
-	public ResponseEntity<Tim> deleteTim(@PathVariable("id") Integer id) {
-		if (timRepository.existsById(id)) {
-			timRepository.deleteById(id);
+    @DeleteMapping("/tim/{id}")
+    @ApiOperation(value = "Briše tim u odnosu na vrednost posleđene path varijable id.")
+    public ResponseEntity<Tim> deleteTim(@PathVariable("id") Integer id) {
+        if (timRepository.existsById(id)) {
+            timRepository.deleteById(id);
 
-			if (id == -100) {
-				jdbcTemplate.execute(
-						"INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', -99)");
-			}
+            if (id == -100) {
+                jdbcTemplate.execute(
+                        "INSERT INTO tim VALUES(-100, 'Radnički', to_date('1914', 'yyyy'), 'Sremska Mitrovica', -99)");
+            }
 
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
-	@GetMapping("/tim")
-	@ApiOperation(value = "Vraća kolekciju svih timova iz baze podataka.")
-	public Collection<Tim> getAllTim() {
-		return timRepository.findAllValid();
-	}
+    @GetMapping("/tim")
+    @ApiOperation(value = "Vraća kolekciju svih timova iz baze podataka.")
+    public Collection<Tim> getAllTim() {
+        return timRepository.findAllValid();
+    }
 
-	@GetMapping("/tim/{id}")
-	@ApiOperation(value = "Vraća tim u odnosu na posleđenu vrednost path varijable id.")
-	public Optional<Tim> getTimById(@PathVariable Integer id) {
-		return timRepository.findById(id);
-	}
+    @GetMapping("/tim/{id}")
+    @ApiOperation(value = "Vraća tim u odnosu na posleđenu vrednost path varijable id.")
+    public Optional<Tim> getTimById(@PathVariable Integer id) {
+        return timRepository.findById(id);
+    }
 
-	@GetMapping("/tim/naziv/{naziv}")
-	@ApiOperation(value = "Vraća tim u odnosu na posleđenu vrednost path varijable naziv.")
-	public Collection<Tim> getTimByNaziv(@PathVariable("naziv") String naziv) {
-		return timRepository.findByNazivContainingIgnoreCase(naziv);
-	}
+    @GetMapping("/tim/naziv/{naziv}")
+    @ApiOperation(value = "Vraća tim u odnosu na posleđenu vrednost path varijable naziv.")
+    public Collection<Tim> getTimByNaziv(@PathVariable("naziv") String naziv) {
+        return timRepository.findByNazivContainingIgnoreCase(naziv);
+    }
 
-	@PostMapping("/tim")
-	@ApiOperation(value = "Dodaje novi tim u bazu podataka.")
-	public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
-		boolean isTest = tim.getId() == -100;
-		if (tim.getId() == null || tim.getId() == 0 || isTest) {
-			tim.setId(null);
-			Tim temp = timRepository.save(tim);
-			if (isTest) {
-				jdbcTemplate.execute("DELETE FROM tim WHERE id=" + temp.getId());
-			}
-			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		return new ResponseEntity<>(HttpStatus.CONFLICT);
-	}
+    @PostMapping("/tim")
+    @ApiOperation(value = "Dodaje novi tim u bazu podataka.")
+    public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
+        boolean isTest = tim.getId() == -100;
+        if (tim.getId() == null || tim.getId() == 0 || isTest) {
+            tim.setId(null);
+            Tim temp = timRepository.save(tim);
+            if (isTest) {
+                jdbcTemplate.execute("DELETE FROM tim WHERE id=" + temp.getId());
+            }
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
 
-	@PutMapping("/tim")
-	@ApiOperation(value = "Ažurira postojeći tim.")
-	public ResponseEntity<Tim> updateTim(@RequestBody Tim tim) {
-		if (timRepository.existsById(tim.getId())) {
-			timRepository.save(tim);
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+    @PutMapping("/tim")
+    @ApiOperation(value = "Ažurira postojeći tim.")
+    public ResponseEntity<Tim> updateTim(@RequestBody Tim tim) {
+        if (timRepository.existsById(tim.getId())) {
+            timRepository.save(tim);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }

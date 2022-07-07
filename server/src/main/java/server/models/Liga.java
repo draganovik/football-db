@@ -17,75 +17,74 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the liga database table.
- *
  */
 @Entity
 @NamedQuery(name = "Liga.findAll", query = "SELECT l FROM Liga l")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Liga implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "LIGA_ID_GENERATOR", sequenceName = "LIGA_ID_REQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIGA_ID_GENERATOR")
-	private Integer id;
+    @Id
+    @SequenceGenerator(name = "LIGA_ID_GENERATOR", sequenceName = "LIGA_ID_REQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIGA_ID_GENERATOR")
+    private Integer id;
 
-	private String naziv;
+    private String naziv;
 
-	private String oznaka;
+    private String oznaka;
 
-	// bi-directional many-to-one association to Tim
-	@OneToMany(mappedBy = "liga", cascade = { CascadeType.DETACH, CascadeType.REMOVE })
-	@JsonIgnore
-	private List<Tim> tims;
+    // bi-directional many-to-one association to Tim
+    @OneToMany(mappedBy = "liga", cascade = {CascadeType.DETACH, CascadeType.REMOVE})
+    @JsonIgnore
+    private List<Tim> tims;
 
-	public Liga() {
-	}
+    public Liga() {
+    }
 
-	public Tim addTim(Tim tim) {
-		getTims().add(tim);
-		tim.setLiga(this);
+    public Tim addTim(Tim tim) {
+        getTims().add(tim);
+        tim.setLiga(this);
 
-		return tim;
-	}
+        return tim;
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public String getNaziv() {
-		return this.naziv;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getOznaka() {
-		return this.oznaka;
-	}
+    public String getNaziv() {
+        return this.naziv;
+    }
 
-	public List<Tim> getTims() {
-		return this.tims;
-	}
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 
-	public Tim removeTim(Tim tim) {
-		getTims().remove(tim);
-		tim.setLiga(null);
+    public String getOznaka() {
+        return this.oznaka;
+    }
 
-		return tim;
-	}
+    public void setOznaka(String oznaka) {
+        this.oznaka = oznaka;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public List<Tim> getTims() {
+        return this.tims;
+    }
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
+    public void setTims(List<Tim> tims) {
+        this.tims = tims;
+    }
 
-	public void setOznaka(String oznaka) {
-		this.oznaka = oznaka;
-	}
+    public Tim removeTim(Tim tim) {
+        getTims().remove(tim);
+        tim.setLiga(null);
 
-	public void setTims(List<Tim> tims) {
-		this.tims = tims;
-	}
+        return tim;
+    }
 
 }

@@ -13,18 +13,18 @@ import server.models.Tim;
 @Repository
 public interface IIgracRepository extends JpaRepository<Igrac, Integer> {
 
-	boolean existsByBrojReg(String brojReg);
+    boolean existsByBrojReg(String brojReg);
 
-	@Query(value = "SELECT * FROM igrac where id > 0", nativeQuery = true)
-	Collection<Igrac> findAllValid();
+    @Query(value = "SELECT * FROM igrac where id > 0", nativeQuery = true)
+    Collection<Igrac> findAllValid();
 
-	Collection<Igrac> findByBrojReg(String brojreg);
+    Collection<Igrac> findByBrojReg(String brojreg);
 
-	Collection<Igrac> findByImeContainingIgnoreCase(String ime);
+    Collection<Igrac> findByImeContainingIgnoreCase(String ime);
 
-	Collection<Igrac> findByTim(Optional<Tim> temp);
+    Collection<Igrac> findByTim(Optional<Tim> temp);
 
-	@Query(value = "SELECT last_value+1" + " FROM player_code where tim = ?1", nativeQuery = true)
-	Integer nextRegBroj(Integer id);
+    @Query(value = "SELECT last_value+1" + " FROM player_code where tim = ?1", nativeQuery = true)
+    Integer nextRegBroj(Integer id);
 
 }
