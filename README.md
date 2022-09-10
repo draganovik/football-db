@@ -7,13 +7,13 @@ Razvoj višeslojnih aplikacija 2021 / 2022 [6. semestar]
 
 ## Badges
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cef86994-4fce-4da2-8713-f9f727311f0e/deploy-status)](https://app.netlify.com/sites/rva-it68g2019/deploys) ![Heroku](https://pyheroku-badge.herokuapp.com/?app=rva-it68g2019&style=flat) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
   
 ## Demo
 
-Angular Web Client: [https://rva-it68g2019.netlify.app](https://rva-it68g2019.netlify.app)
+Angular Web Client: [football-db-client-angular.up.railway.app](https://football-db-client-angular.up.railway.app)
 
-Spring Boot Server: [https://rva-it68g2019.herokuapp.com](https://rva-it68g2019.herokuapp.com)
+Spring Boot Server: [football-db-server-spring.up.railway.app](https://football-db-server-spring.up.railway.app)
 
 ## Tech Stack
 
